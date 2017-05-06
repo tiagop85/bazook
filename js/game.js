@@ -23,7 +23,7 @@ GameState.prototype.create = function() {
     this.player.body.bounce.set(1);
     
 //criando plataforma
-    this.platform = this.game.add.sprite(300,500,'platform');
+    this.platform = this.game.add.sprite(300,400,'platform');
     this.game.physics.enable(this.platform);
     this.platform.body.immovable = true;
 
@@ -69,6 +69,7 @@ GameState.prototype.update = function() {
         this.platform.body.velocity.x = 300;
     }
     else this.platform.body.velocity.x = -400;
+}
 
 GameState.prototype.platformCollision = function(player, platform){
     this.score++;
@@ -77,4 +78,4 @@ GameState.prototype.platformCollision = function(player, platform){
     this.game.add.tween(this.player).to({angle:360}, 750, Phaser.Easing.Quadratic.Out).start();
 }    
     
-}
+
