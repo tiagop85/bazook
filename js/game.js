@@ -6,6 +6,9 @@ GameState.prototype.preload = function () {
     this.game.load.image('player', 'assets/player.png');
     this.game.load.image('platform', 'assets/wallHorizontal.png');
     this.game.load.image('cannon', 'assets/cannon.png');
+    this.game.load.image('background0','assets/mountains-back.png');
+	this.game.load.image('background1','assets/mountains-mid1');
+	this.game.load.image('background2','assets/mountains-mid2');
 };
 
 GameState.prototype.create = function () {
@@ -17,6 +20,27 @@ GameState.prototype.create = function () {
 //ativar sistema de física
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
     this.game.stage.backgroundColor = "#5c82bc";
+//Propriedades do Background    
+     this.mountainsBack = this.game.add.tileSprite(0, 
+        this.game.height - this.game.cache.getImage('background0').height, 
+        this.game.width, 
+        this.game.cache.getImage('background0').height, 
+        'background0'
+    );
+ 
+    this.mountainsMid1 = this.game.add.tileSprite(0, 
+        this.game.height - this.game.cache.getImage('background1').height, 
+        this.game.width, 
+        this.game.cache.getImage('background1').height, 
+        'background1'
+    );
+ 
+    this.mountainsMid2 = this.game.add.tileSprite(0, 
+        this.game.height - this.game.cache.getImage('background2').height, 
+        this.game.width, 
+        this.game.cache.getImage('background2').height, 
+        'background2'
+    );
 
 // Cenário
     this.cenarioItems = this.game.add.group();
@@ -84,6 +108,11 @@ GameState.prototype.update = function () {
         this.freezePlayerPos = true;
         this.platform.body.velocity.x = this.CENARIO_SPEED;
     }
+//Parallax    
+    this.mountainsBack.tilePosition.x -= 0.05;
+    this.mountainsMid1.tilePosition.x -= 0.3;
+    this.mountainsMid2.tilePosition.x -= 0.75;
+    
 };
 
 GameState.prototype.platformCollision = function (player, platform) {
