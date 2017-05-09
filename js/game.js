@@ -12,15 +12,20 @@ GameState.prototype.preload = function () {
 };
 
 GameState.prototype.create = function () {
+//const
     this.SHOT_SPEED = 750;
     this.PLAYER_POSITION = 400;
     this.PLATFORM_SPEED = 300;
     this.CENARIO_SPEED = -400;
     
+//var
+    this.GAME_STATUS = 0; //| 0: not started | 1: started - launching | 2: started - stabled_x | -1: game over | 
+    
 //ativar sistema de física
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
     this.game.stage.backgroundColor = "#5c82bc";
-//Propriedades do Background    
+    
+//Propriedades do Background
      this.mountainsBack = this.game.add.tileSprite(0, 
         this.game.height - this.game.cache.getImage('background0').height, 
         this.game.width, 
@@ -53,11 +58,14 @@ GameState.prototype.create = function () {
     this.cannon.anchor.y = 0.5;
     this.cannon.angle = -45;
     
+    this.cenarioItems.setAll("body.velocity.x",0);    
+    
 //criando player
     this.player = this.game.add.sprite(this.cannon.x, this.cannon.y, 'player');
     this.player.anchor.setTo(0.5, 0.5);
     this.game.physics.enable(this.player);
     this.player.body.gravity.y = 750;
+    this.player.visible = false;
     
     //  This makes the game world bounce-able
     this.player.body.collideWorldBounds = true;
@@ -74,57 +82,82 @@ GameState.prototype.create = function () {
     this.rightKey = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
     
     this.score = 0;
-    this.freezePlayerPos = false;
+//    this.freezePlayerPos = false;
     this.textScore = this.game.add.text(400, 100, "SCORE: " + this.score, {fill: '#fff'});
     console.debug("score: " + this.score);
+
 };
 
 GameState.prototype.update = function () {
-    if (this.freezePlayerPos) {
-        this.player.body.position.x = this.PLAYER_POSITION;
-        this.cenarioItems.setAll("body.velocity.x",this.CENARIO_SPEED);
+//    console.debug("GAME_STATUS: " + this.GAME_STATUS);    
+
+//condicao de derrota
+    if (this.player.y > 450 && this.GAME_STATUS > 0){
+        this.GAME_STATUS = -1;
+        this.player.body.velocity.x = 0;
+        this.player.body.velocity.y = 0;
+        this.cenarioItems.setAll("body.velocity.x",0);
+        this.platform.body.velocity.x = 0;
+        
+//        var timeCheck = game.time.now;
+        
+        //this.game.state.start('lose');
     }
+
+//    if ((this.GAME_STATUS == -1) && (game.time.now timeCheck >= 3)) {
+//        this.game.state.start('lose');
+//    }    
     
 //colisões
     this.game.physics.arcade.collide(this.player, this.platform, this.platformCollision, null, this);
     
-//condicao de derrota
-    if (this.player.y > 650){
-        //this.game.state.start('lose');
-    }
-    
 //movimentação
     this.cannon.rotation = this.game.physics.arcade.angleToPointer(this.cannon);
-    
-    if (this.shootKey.isDown || this.game.input.activePointer.isDown) {
+
+    if (((this.shootKey.isDown || this.game.input.activePointer.isDown)) && (this.GAME_STATUS == 0)){
         this.shootCannon();
     }
 
-    if (this.leftKey.isDown) {
+    if (this.leftKey.isDown && this.GAME_STATUS != -1) {
         this.platform.body.velocity.x = -this.PLATFORM_SPEED;
-    } else if (this.rightKey.isDown) {
+    } else if (this.rightKey.isDown && this.GAME_STATUS != -1) {
         this.platform.body.velocity.x = this.PLATFORM_SPEED;
-    } else if (this.player.x >= this.PLAYER_POSITION) {
-        this.freezePlayerPos = true;
+    }
+    
+    
+    if (this.player.x >= this.PLAYER_POSITION && this.GAME_STATUS == 1) {
+        this.GAME_STATUS = 2;
+        this.player.body.position.x = this.PLAYER_POSITION;
+        this.cenarioItems.setAll("body.velocity.x",this.CENARIO_SPEED);
         this.platform.body.velocity.x = this.CENARIO_SPEED;
     }
-//Parallax    
-    this.mountainsBack.tilePosition.x -= 0.05;
-    this.mountainsMid1.tilePosition.x -= 0.3;
-    this.mountainsMid2.tilePosition.x -= 0.75;
-    
+
+    if (this.GAME_STATUS == 2) {
+        //Fixing player x
+        this.player.body.position.x = this.PLAYER_POSITION;
+        
+        //Parallax    
+        this.mountainsBack.tilePosition.x -= 0.05;
+        this.mountainsMid1.tilePosition.x -= 0.3;
+        this.mountainsMid2.tilePosition.x -= 0.75;
+    }
 };
 
 GameState.prototype.platformCollision = function (player, platform) {
-    this.score++;
-    this.textScore.setText("SCORE: "+this.score);
-    this.game.add.tween(this.player).to({angle:360}, 750, Phaser.Easing.Quadratic.Out).start();
+    if (this.GAME_STATUS != -1) {
+        this.score++;
+        this.textScore.setText("SCORE: "+this.score);
+//      this.player.body.velocity.y = ;
+        this.game.add.tween(this.player).to({angle:360}, 750, Phaser.Easing.Quadratic.Out).start();
+    }
 };
 
 GameState.prototype.shootCannon = function () {
   // Set the bullet position to the gun position.
     this.player.reset(this.cannon.x, this.cannon.y);
     this.player.rotation = this.cannon.rotation;
+    this.player.visible = true;
+    this.GAME_STATUS = 1;
 
     // Shoot it in the right direction
     this.player.body.velocity.x = Math.cos(this.player.rotation) * this.SHOT_SPEED;
