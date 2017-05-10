@@ -14,7 +14,7 @@ MenuState.prototype.create = function() {
         var music
         music = game.add.audio('music_menu');
 //        this.music.stop();
-        music.play();        
+        music.loopFull();        
         music.volume = 100;
     }
     

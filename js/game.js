@@ -45,11 +45,11 @@ GameState.prototype.create = function () {
 
 //canhão
     //TODO: fixar ponto de giro na base do canhão, pois o movimento ta estranho
-    this.cannon = this.cenarioItems.create(100, 400, 'cannon');
+    this.cannon = this.cenarioItems.create(85, 417, 'cannon');
     this.cannon.scale.x = 0.45;
     this.cannon.scale.y = 0.45;
-    this.cannon.anchor.x = 0.5;
-    this.cannon.anchor.y = 0.5;
+    this.cannon.anchor.x = 0.19;
+    this.cannon.anchor.y = 0.59;
     this.cannon.angle = -45;
     this.cannon_base = this.cenarioItems.create(57, 410, 'cannon_base');
     this.cannon_base.scale.x = 0.45;
