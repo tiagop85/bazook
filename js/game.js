@@ -31,13 +31,14 @@ GameState.prototype.create = function () {
         this.game.cache.getImage('bgGameCirco').height, 
         'bgGameCirco'
     );
- 
-    this.mountainsMid1 = this.game.add.tileSprite(0, 
-        this.game.height - this.game.cache.getImage('bgGamePlateia').height, 
+     this.groundParallax = this.game.add.tileSprite(0, 
+        this.game.height - this.game.cache.getImage('ground').height, 
         this.game.width, 
-        this.game.cache.getImage('bgGamePlateia').height, 
-        'bgGamePlateia'
+        this.game.cache.getImage('ground').height, 
+        'ground'
     );
+ 
+    
 
 //cenário
     this.cenarioItems = this.game.add.group();
@@ -55,7 +56,9 @@ GameState.prototype.create = function () {
     this.cannon_base.scale.x = 0.45;
     this.cannon_base.scale.y = 0.45;
     
-    this.cenarioItems.setAll("body.velocity.x",0);    
+    this.cenarioItems.setAll("body.velocity.x",0); 
+    
+       
     
 //player
     this.player = this.game.add.sprite(this.cannon.x, this.cannon.y, 'player');
@@ -72,6 +75,15 @@ GameState.prototype.create = function () {
     this.platform = this.game.add.sprite(300, 400, 'platform');
     this.game.physics.enable(this.platform);
     this.platform.body.immovable = true;
+    
+//Foreground plateia   
+    this.foreground = this.game.add.tileSprite(0, 
+        this.game.height - this.game.cache.getImage('foreground').height, 
+        this.game.width, 
+        this.game.cache.getImage('foreground').height, 
+        'foreground'
+    );
+    
     
 //score
     this.scorebg = this.game.add.sprite(10,10,'score')
@@ -141,7 +153,6 @@ GameState.prototype.update = function () {
     }
     
     if (((this.shootKey.isDown || this.game.input.activePointer.isDown)) && (this.GAME_STATUS == 0) && (game.input.mousePointer.y > 55)){
-    	console.debug(game.input.mousePointer.y);
         //lançar jogador
         this.shootCannon();
     }
@@ -153,7 +164,7 @@ GameState.prototype.update = function () {
         //parallax
         //TODO: trocar por velocidade no eixo X
         this.mountainsBack.tilePosition.x -= 0.3;
-        this.mountainsMid1.tilePosition.x -= 1;
+        this.foreground.tilePosition.x -= 1;
 //        this.mountainsMid2.tilePosition.x -= 0.75;
         
         //setando velocidade da plataforma
