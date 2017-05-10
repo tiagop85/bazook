@@ -3,13 +3,10 @@
 var CreditsState = function(game) {};
 
 CreditsState.prototype.preload = function() {
-    this.game.load.image('background', 'Assets/credits_screen.png');
-    this.game.load.image('menu', 'Assets/button_home_on.png');
-    this.game.load.image('sound_on', 'Assets/button_sound_on.png');
 };
 
 CreditsState.prototype.create = function() {
-    this.game.add.sprite(0,0, 'background')
+    this.game.add.sprite(0,0, 'bgCredits')
 
     this.menu = this.game.add.sprite(10, 10, 'menu')
     this.menu.scale.x = 1.1
@@ -21,15 +18,7 @@ CreditsState.prototype.create = function() {
     this.sound.scale.x = 1.1
     this.sound.scale.y = 1.1
     this.sound.inputEnabled = true;
-    this.sound.events.onInputDown.add(setSound, this);   
-};
-
-function gotoMenu(item) {
-    this.game.state.start("menu");
-};
-
-function setSound(item) {
-//    this.game.state.start("credits");
+    this.sound.events.onInputDown.add(setarSound, this);   
 };
 
 CreditsState.prototype.update = function() {

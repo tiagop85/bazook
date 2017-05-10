@@ -3,16 +3,24 @@
 var MenuState = function(game) {};
 
 MenuState.prototype.preload = function() {
-    this.game.load.image('background', 'Assets/initial_screen.png');
-    this.game.load.image('play', 'Assets/big_button_play_on.png');
-    this.game.load.image('credits', 'Assets/big_button_credits_on.png');    
-    this.game.load.image('sound_on', 'Assets/button_sound_on.png');
 };
 
 MenuState.prototype.create = function() {
-    this.game.add.sprite(0,0, 'background')
+    game.sound.mute = false;
+    console.debug("game.global.music: " + game.global.music);
+    if (game.global.music != 1){
+        game.global.music = 1;
+        console.debug("game.global.music: " + game.global.music);
+        var music
+        music = game.add.audio('music_menu');
+//        this.music.stop();
+        music.play();        
+        music.volume = 100;
+    }
     
-    this.play = this.game.add.sprite(220, 400, 'play')
+    this.game.add.sprite(0,0, 'bgMenu')
+    
+    this.play = this.game.add.sprite(220, 400, 'start')
     this.play.scale.x = 1.1
     this.play.scale.y = 1.1
     this.play.inputEnabled = true;
@@ -28,19 +36,7 @@ MenuState.prototype.create = function() {
     this.sound.scale.x = 1.1
     this.sound.scale.y = 1.1
     this.sound.inputEnabled = true;
-    this.sound.events.onInputDown.add(setSound, this);    
-};
-
-function gotoGame(item) {
-    this.game.state.start("game");
-};
-
-function gotoCredits(item) {
-    this.game.state.start("credits");
-};
-
-function setSound(item) {
-//    this.game.state.start("credits");
+    this.sound.events.onInputDown.add(setarSound, this);    
 };
 
 MenuState.prototype.update = function() {
