@@ -140,7 +140,8 @@ GameState.prototype.update = function () {
         this.cannon.rotation = this.rotacao;
     }
     
-    if (((this.shootKey.isDown || this.game.input.activePointer.isDown)) && (this.GAME_STATUS == 0)){
+    if (((this.shootKey.isDown || this.game.input.activePointer.isDown)) && (this.GAME_STATUS == 0) && (game.input.mousePointer.y > 55)){
+    	console.debug(game.input.mousePointer.y);
         //lançar jogador
         this.shootCannon();
     }
