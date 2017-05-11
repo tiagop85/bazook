@@ -1,9 +1,11 @@
 var game = new Phaser.Game(840, 480, Phaser.AUTO, 'phaser-canvas');
 
 game.global = {
- score : 0,
- sound : true,
- music : -1
+    score : 0,
+//   sound : true,
+    music : -1,
+    sound_sprite: 'sound_on'
+     
 }
 
 game.state.add('functions', FunctionsGame);

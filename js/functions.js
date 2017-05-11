@@ -29,6 +29,8 @@ FunctionsGame.prototype.preload = function() {
     
     this.game.load.audio('music_menu', ['assets/audio/Super Circus_01.ogg']);
     this.game.load.audio('music_game', ['assets/audio/Circus Tent_01.ogg']);
+    
+    game.sound.mute = false;
 };
 
 FunctionsGame.prototype.create = function() {
@@ -50,10 +52,12 @@ function gotoCredits(item) {
 function setarSound(item) {
     if (game.sound.mute) {
         game.sound.mute = false;
+        game.global.sound_sprite = 'sound_on';
         this.sound.loadTexture('sound_on');
     }
     else {
         game.sound.mute = true;
+        game.global.sound_sprite = 'sound_off';
         this.sound.loadTexture('sound_off');
     }    
 };

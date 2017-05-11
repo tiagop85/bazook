@@ -17,8 +17,15 @@ GameState.prototype.create = function () {
 //variáveis
     this.GAME_STATUS = 0; //| 0: pré-partida | 1: lançando player | 2: player lançado | -1: game over | 
     
+    if (game.global.music != 2){
+        game.global.music = 2;
+        game.sound.stopAll();
+        this.music_game = this.game.add.music = this.add.audio('music_game');        
+        this.music_game.loopFull();        
+        this.music_game.volume = 100;   
+    }    
+    
     game.paused = false;  
-    game.sound.mute = false;
     
 //ativar sistema de física
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -101,7 +108,7 @@ GameState.prototype.create = function () {
     this.menu.events.onInputDown.add(gotoMenu, this);
 
 //sound
-    this.sound = this.game.add.sprite(785, 10, 'sound_on')
+    this.sound = this.game.add.sprite(785, 10, game.global.sound_sprite)
     this.sound.scale.x = 1.1
     this.sound.scale.y = 1.1
     this.sound.inputEnabled = true;

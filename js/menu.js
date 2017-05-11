@@ -5,17 +5,13 @@ var MenuState = function(game) {};
 MenuState.prototype.preload = function() {
 };
 
-MenuState.prototype.create = function() {
-    game.sound.mute = false;
-    console.debug("game.global.music: " + game.global.music);
+MenuState.prototype.create = function() {    
     if (game.global.music != 1){
         game.global.music = 1;
-        console.debug("game.global.music: " + game.global.music);
-        var music
-        music = game.add.audio('music_menu');
-//        this.music.stop();
-        music.loopFull();        
-        music.volume = 100;
+        game.sound.stopAll();    
+        this.music_menu = this.game.add.music = this.add.audio('music_menu');        
+        this.music_menu.loopFull();        
+        this.music_menu.volume = 100;   
     }
     
     this.game.add.sprite(0,0, 'bgMenu')
@@ -32,7 +28,7 @@ MenuState.prototype.create = function() {
     this.credits.inputEnabled = true;
     this.credits.events.onInputDown.add(gotoCredits, this);    
 
-    this.sound = this.game.add.sprite(785, 10, 'sound_on')
+    this.sound = this.game.add.sprite(785, 10, game.global.sound_sprite)
     this.sound.scale.x = 1.1
     this.sound.scale.y = 1.1
     this.sound.inputEnabled = true;

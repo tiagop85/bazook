@@ -14,7 +14,7 @@ CreditsState.prototype.create = function() {
     this.menu.inputEnabled = true;
     this.menu.events.onInputDown.add(gotoMenu, this);
     
-    this.sound = this.game.add.sprite(785, 10, 'sound_on')
+    this.sound = this.game.add.sprite(785, 10, game.global.sound_sprite)
     this.sound.scale.x = 1.1
     this.sound.scale.y = 1.1
     this.sound.inputEnabled = true;
