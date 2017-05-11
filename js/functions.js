@@ -26,6 +26,7 @@ FunctionsGame.prototype.preload = function() {
     this.game.load.image('bgGameOver'   , 'Assets/game_over_screen.png');
     this.game.load.image('restart'      , 'Assets/button_back_off.png');
     this.game.load.image('bgCredits'    , 'Assets/credits_screen.png');    
+    this.game.load.image('bgSplash'     , 'Assets/splash_screen.png');    
     
     this.game.load.audio('music_menu', ['assets/audio/Super Circus_01.ogg']);
     this.game.load.audio('music_game', ['assets/audio/Circus Tent_01.ogg']);
