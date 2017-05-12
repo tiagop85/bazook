@@ -27,10 +27,23 @@ GameState.prototype.create = function () {
     }    
     
     game.paused = false;  
+
+  // we need to add margin to the world, so the camera can move
+  var margin = 50;
+  // and set the world's bounds according to the given margin
+  var x = -margin;
+  var y = -margin;
+  var w = game.world.width + margin * 2;
+  var h = game.world.height + margin * 2;
+  // it's not necessary to increase height, we do it to keep uniformity
+  game.world.setBounds(x, y, w, h);
+  
+  // we make sure camera is at position (0,0)
+  game.world.camera.position.set(0);    
     
 //ativar sistema de física
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
-    this.game.stage.backgroundColor = "#5c82bc";
+    this.game.stage.backgroundColor = "#000000";
     
 //background
      this.fundoCirco = this.game.add.tileSprite(0, 
@@ -151,10 +164,14 @@ GameState.prototype.create = function () {
 GameState.prototype.update = function () {
 //condicao de derrota
     if (this.player.y > 380 && this.GAME_STATUS > 0 ){
-        this.caiu_chao = this.game.add.music = this.add.audio('caiu_chao');        
-        this.caiu_chao.play(); 
         //setando game status 
         this.GAME_STATUS = -1;
+
+        this.caiu_chao = this.game.add.music = this.add.audio('caiu_chao');        
+        this.caiu_chao.play(); 
+        
+        addQuake();
+        
         //parando os componentes da tela
         this.player.body.velocity.x = 0;
         this.player.body.velocity.y = 0;
@@ -263,6 +280,13 @@ GameState.prototype.platformCollision = function (player, platform) {
             this.PLAYER_GRAVITY = this.PLAYER_GRAVITY * 1.2;
             this.player.body.gravity.y = this.PLAYER_GRAVITY; 
         }
+        else{
+            if (game.global.score % (this.SCORE_GETHARD*3-2) == 0 ){
+                this.aplausos = this.game.add.music = this.add.audio('aplausos');        
+                this.aplausos.play();   
+            }
+            
+        }
     }
 };
 
@@ -287,3 +311,34 @@ GameState.prototype.shootCannon = function () {
     this.player.body.velocity.x = Math.cos(this.player.rotation) * this.SHOT_SPEED;
     this.player.body.velocity.y = Math.sin(this.player.rotation) * this.SHOT_SPEED;  
 };
+
+function addQuake() {
+  
+  // define the camera offset for the quake
+  var rumbleOffset = 10;
+  
+  // we need to move according to the camera's current position
+  var properties = {
+    x: game.camera.x - rumbleOffset
+  };
+  
+  // we make it a relly fast movement
+  var duration = 40;
+  // because it will repeat
+  var repeat = 1;
+  // we use bounce in-out to soften it a little bit
+  var ease = Phaser.Easing.Bounce.InOut;
+  var autoStart = false;
+  // a little delay because we will run it indefinitely
+  var delay = 0;
+  // we want to go back to the original position
+  var yoyo = true;
+ 
+  var quake = game.add.tween(game.camera).to(properties, duration, ease, autoStart, delay, repeat, yoyo);
+  
+  // we're using this line for the example to run indefinitely
+  // quake.onComplete.addOnce(addQuake);
+  
+  // let the earthquake begins
+  quake.start();
+}

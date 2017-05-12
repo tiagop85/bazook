@@ -51,8 +51,7 @@ FunctionsGame.prototype.preload = function() {
 /*
     this.aplausos = this.game.add.music = this.add.audio('aplausos');        
     this.aplausos.play();   
-*/
-
+*/    
     game.sound.mute = false;
 };
 
