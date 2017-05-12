@@ -79,7 +79,7 @@ GameState.prototype.create = function () {
     this.player.body.bounce.set(1);
         
 //plataforma
-    this.platform = this.game.add.sprite(300, 400, 'platform');
+    this.platform = this.game.add.sprite(300, 300, 'platform');
     this.platform.animations.add('walk');
     this.platform.animations.play('walk', 60, true);
     this.game.physics.enable(this.platform);
