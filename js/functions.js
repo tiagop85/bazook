@@ -15,10 +15,11 @@ FunctionsGame.prototype.preload = function() {
     this.game.load.image('bgCortina'    , 'Assets/cortina.png');
 	this.game.load.image('bgPlateia'	, 'Assets/plateia.png');
 	this.game.load.image('ground'		, 'Assets/ground.png');
-    this.game.load.image('player'       , 'Assets/player.png'); //TODO trocar pela imagem do elefante
+    this.game.load.image('player'       , 'Assets/elefante_sprites.png'); //TODO trocar pela imagem do elefante
     //this.game.load.image('platform'     , 'Assets/wallHorizontal.png'); // TODO trocar pela imagem das girafas
     //spritesheet(key, url, frameWidth, frameHeight, frameMax, margin, spacing)
-    this.game.load.spritesheet('platform', 'Assets/girafas_174x77.png', 174, 77, 9);
+    this.game.load.spritesheet('girafas', 'Assets/girafas_174x77.png', 174, 77, 9);
+    this.game.load.image('plataforma'	, 'Assets/invisible_platform.png');
     this.game.load.image('cannon'       , 'Assets/cannon.png');
     this.game.load.image('cannon_base'  , 'Assets/cannon_basis.png');
        

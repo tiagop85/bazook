@@ -80,15 +80,25 @@ GameState.prototype.create = function () {
     this.game.physics.enable(this.player);
     this.player.body.gravity.y = this.PLAYER_GRAVITY;
     this.player.visible = false;
+    this.player.scale.x = 0.9;
+    this.player.scale.y = 0.9;
     
     //This makes the game world bounce-able
-    this.player.body.collideWorldBounds = true;
+    this.player.body.collideWorldBounds = false;
     this.player.body.bounce.set(1);
         
 //plataforma
-    this.platform = this.game.add.sprite(300, 350, 'platform');
-    this.platform.animations.add('walk');
-    this.platform.animations.play('walk', 12, true);
+    
+    this.girafas = this.game.add.sprite(300, 390, 'girafas');
+    this.girafas.animations.add('walk');
+    this.girafas.animations.play('walk', 12, true);
+    this.girafas.anchor.x = 0.5;
+    this.girafas.anchor.y = 0.5;
+    
+    this.platform = this.game.add.sprite(300, 390, 'plataforma');
+    this.platform.scale.x = 0.55;
+    this.platform.anchor.x = 0.5;
+    this.platform.anchor.y = 0.5;
     this.game.physics.enable(this.platform);
     this.platform.body.immovable = true;
     
@@ -201,7 +211,10 @@ GameState.prototype.update = function () {
     }
     else if (this.GAME_STATUS != 2){
         this.platform.body.velocity.x = 0;
-    }        
+    }
+// Atualiza a posição das girafas de acordo com a plataforma
+    this.girafas.x = this.platform.x;
+    this.girafas.y = this.platform.y;
 };
 
 GameState.prototype.platformCollision = function (player, platform) {
