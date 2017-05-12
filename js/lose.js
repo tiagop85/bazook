@@ -6,6 +6,9 @@ LoseState.prototype.preload = function() {
 };
 
 LoseState.prototype.create = function() {
+    this.aplausos = this.game.add.music = this.add.audio('aplausos');        
+    this.aplausos.play();   
+
     this.game.add.sprite(0,0, 'bgGameOver')
 
     this.menu = this.game.add.sprite(10, 10, 'menu')
@@ -18,7 +21,7 @@ LoseState.prototype.create = function() {
     this.sound.scale.x = 1.1
     this.sound.scale.y = 1.1
     this.sound.inputEnabled = true;
-    this.sound.events.onInputDown.add(setarSound, this);       
+    this.sound.events.onInputDown.add(setarSound, this);    
     
     this.restart = this.game.add.sprite(400, 360, 'restart')
     this.restart.scale.x = 1.1

@@ -3,7 +3,8 @@
 var GameState = function (game) {};
 
 GameState.prototype.preload = function () {
-    
+//    this.andando = this.game.add.music = this.add.audio('andando');            
+    this.tambores = this.game.add.music = this.add.audio('tambores');        
 };
 
 GameState.prototype.create = function () {
@@ -13,7 +14,7 @@ GameState.prototype.create = function () {
     this.PLAYER_VEL_Y = -800;
     this.PLAYER_POSITION = 400;
     this.PLATFORM_SPEED = 300;
-    this.CENARIO_SPEED = -400;
+//    this.CENARIO_SPEED = -400;
     
 //variáveis
     this.GAME_STATUS = 0; //| 0: pré-partida | 1: lançando player | 2: player lançado | -1: game over | 
@@ -23,7 +24,6 @@ GameState.prototype.create = function () {
         game.sound.stopAll();
         this.music_game = this.game.add.music = this.add.audio('music_game');        
         this.music_game.loopFull();        
-//        this.music_game.volume = 100;   
     }    
     
     game.paused = false;  
@@ -40,16 +40,16 @@ GameState.prototype.create = function () {
         'bgGameCirco'
     );
     
-    this.cabecalho = this.game.add.sprite(0,0, 'bgCabecalho');
-    this.cabecalho.scale.y = 0.7;
-    
     this.topCirco = this.game.add.tileSprite(0,
-        this.cabecalho.height,
+        65,
         //this.game.height - this.game.cache.getImage('bgTopCirco').height, 
         this.game.width, 
         this.game.cache.getImage('bgTopCirco').height, 
         'bgTopCirco'
     );
+    this.cabecalho = this.game.add.sprite(0,0, 'bgCabecalho');
+    this.cabecalho.scale.y = 0.8;
+
     this.ground = this.game.add.tileSprite(0, 
         this.game.height - this.game.cache.getImage('ground').height, 
         this.game.width, 
@@ -144,17 +144,24 @@ GameState.prototype.create = function () {
     this.cortina = this.game.add.sprite(0,0, 'bgCortina');
     this.game.physics.enable(this.cortina);
     this.cortina.body.velocity.y = -400;
+
+    this.tambores.loopFull();   
 };
 
 GameState.prototype.update = function () {
 //condicao de derrota
-    if (this.player.y > 450 && this.GAME_STATUS > 0){
+    if (this.player.y > 420 && this.GAME_STATUS > 0 ){
+        this.caiu_chao = this.game.add.music = this.add.audio('caiu_chao');        
+        this.caiu_chao.play(); 
         //setando game status 
         this.GAME_STATUS = -1;
         //parando os componentes da tela
         this.player.body.velocity.x = 0;
         this.player.body.velocity.y = 0;
+        this.player.body.gravity.y = 0;
+        this.player.body.immovable = true;
         this.cenarioItems.setAll("body.velocity.x",0);
+        this.girafas.animations.stop(null, true);
         this.platform.body.velocity.x = 0;
         //TODO: restart? creio que nao                    
         this.game.time.events.add(Phaser.Timer.SECOND * 2, gotoLose, this);
@@ -180,12 +187,13 @@ GameState.prototype.update = function () {
         this.player.body.position.x = this.PLAYER_POSITION;
         
         //parallax
-        this.fundoCirco.tilePosition.x -= this.PLATFORM_SPEED/150;
-        this.topCirco.tilePosition.x -= this.PLATFORM_SPEED/150;
-        this.plateia.tilePosition.x -= this.PLATFORM_SPEED/300;
+        this.fundoCirco.tilePosition.x -= this.PLATFORM_SPEED/100;
+        this.topCirco.tilePosition.x -= this.PLATFORM_SPEED/100;
+        this.plateia.tilePosition.x -= this.PLATFORM_SPEED/250;
         
         //setando velocidade da plataforma
-        this.platform.body.velocity.x = this.CENARIO_SPEED;
+        this.girafas.animations.play('walk', 12, true);
+        this.platform.body.velocity.x = -this.PLATFORM_SPEED;
     }
 
     if (this.player.x >= this.PLAYER_POSITION && this.GAME_STATUS == 1) {
@@ -196,20 +204,37 @@ GameState.prototype.update = function () {
         this.player.body.position.x = this.PLAYER_POSITION;
         
         //setando velocidade do canhão
-        this.cenarioItems.setAll("body.velocity.x",this.CENARIO_SPEED);
+        this.cenarioItems.setAll("body.velocity.x",-this.PLATFORM_SPEED);
 
         //setando velocidade da plataforma
-        this.platform.body.velocity.x = this.CENARIO_SPEED;
+        this.girafas.animations.play('walk', 12, true);
+        this.platform.body.velocity.x = -this.PLATFORM_SPEED;
     }
 
 //movimentação da plataforma (deixar sempre por ultimo)    
     if (this.leftKey.isDown && this.GAME_STATUS != -1) {
+        this.girafas.animations.play('walk', 12, true);
+//        TODO: somente tocar o som do passo se nao estiver tocando
+//        if (!this.andando.playing){
+//            this.andando.play();   
+//        }
         this.platform.body.velocity.x = -this.PLATFORM_SPEED;
     } 
     else if (this.rightKey.isDown && this.GAME_STATUS != -1) {
-        this.platform.body.velocity.x = this.PLATFORM_SPEED;
+        this.girafas.animations.play('walk', 12, true);
+//        TODO: somente tocar o som do passo se nao estiver tocando
+//        if (!this.andando.playing){
+//            this.andando.play();   
+//        }
+        if (this.GAME_STATUS == 2){
+            this.platform.body.velocity.x = this.PLATFORM_SPEED/2.5;
+        }
+        else{
+            this.platform.body.velocity.x = this.PLATFORM_SPEED;
+        }
     }
     else if (this.GAME_STATUS != 2){
+        this.girafas.animations.stop(null, true);
         this.platform.body.velocity.x = 0;
     }
 // Atualiza a posição das girafas de acordo com a plataforma
@@ -218,17 +243,37 @@ GameState.prototype.update = function () {
 };
 
 GameState.prototype.platformCollision = function (player, platform) {
-    if (this.GAME_STATUS != -1) {        
+    if (this.GAME_STATUS != -1) {         
+        this.button_click = this.game.add.music = this.add.audio('pulo_mola');        
+        this.button_click.play();    
+        
         //TODO: contar apenas se a colisão vier de cima e 1x só mesmo q elefante role na plataforma
         game.global.score++;
         this.textScore.setText(game.global.score);
         //TODO: random speed Y
         this.player.body.velocity.y = this.PLAYER_VEL_Y;
         this.game.add.tween(this.player).to({angle:360}, 500, Phaser.Easing.Quadratic.Out).start();
+        
+        if (game.global.score % 4 == 0 ){
+            this.elefante = this.game.add.music = this.add.audio('elefante');        
+            this.elefante.play();   
+            this.PLATFORM_SPEED = this.PLATFORM_SPEED * 1.2;
+            this.PLAYER_VEL_Y = this.PLAYER_VEL_Y * 1.1;
+            this.PLAYER_GRAVITY = this.PLAYER_GRAVITY * 1.2;
+            this.player.body.gravity.y = this.PLAYER_GRAVITY; 
+        }
     }
 };
 
 GameState.prototype.shootCannon = function () {
+    this.tambores.stop();   
+    this.tiro_canhao = this.game.add.music = this.add.audio('tiro_canhao');        
+    this.tiro_canhao.play();   
+    
+    this.elefante = this.game.add.music = this.add.audio('elefante');        
+    this.elefante.play();   
+    
+
     //setando game status 
     this.GAME_STATUS = 1;
 

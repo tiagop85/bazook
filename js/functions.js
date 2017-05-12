@@ -16,8 +16,6 @@ FunctionsGame.prototype.preload = function() {
 	this.game.load.image('bgPlateia'	, 'Assets/plateia.png');
 	this.game.load.image('ground'		, 'Assets/ground.png');
     this.game.load.image('player'       , 'Assets/elefante_sprites.png'); //TODO trocar pela imagem do elefante
-    //this.game.load.image('platform'     , 'Assets/wallHorizontal.png'); // TODO trocar pela imagem das girafas
-    //spritesheet(key, url, frameWidth, frameHeight, frameMax, margin, spacing)
     this.game.load.spritesheet('girafas', 'Assets/girafas_174x77.png', 174, 77, 9);
     this.game.load.image('plataforma'	, 'Assets/invisible_platform.png');
     this.game.load.image('cannon'       , 'Assets/cannon.png');
@@ -38,6 +36,22 @@ FunctionsGame.prototype.preload = function() {
     
     this.game.load.audio('button_click' , ['assets/audio/Button-SoundBible.com-1420500901_01.ogg']);
     this.game.load.audio('button_switch', ['assets/audio/Switch-SoundBible.com-350629905_01.ogg']);
+    this.game.load.audio('pulo_mola',     ['assets/audio/zapsplat_caroon_plastic_twang_01.ogg']);    
+    this.game.load.audio('caiu_chao',     ['assets/audio/PUNCH_01.ogg']);    
+//    this.game.load.audio('andando',       ['assets/audio/268758__deleted-user-5093904__footsteps_01.ogg']);    
+    this.game.load.audio('tiro_canhao',   ['assets/audio/370219__eflexthesounddesigner__cannon-shot-sci-fi-mixed_01.ogg']);    
+    this.game.load.audio('tambores',      ['assets/audio/Drum Roll-SoundBible.com-1599301580_01.ogg']);    
+    this.game.load.audio('elefante',      ['assets/audio/139052__jasher70__elephant-scream_01.ogg']);    
+    this.game.load.audio('aplausos',      ['assets/audio/51743__erkanozan__applause_01.ogg']);    
+    
+    
+    
+    
+    
+/*
+    this.aplausos = this.game.add.music = this.add.audio('aplausos');        
+    this.aplausos.play();   
+*/
 
     game.sound.mute = false;
 };
