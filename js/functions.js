@@ -16,9 +16,9 @@ FunctionsGame.prototype.preload = function() {
 	this.game.load.image('foreground'	, 'Assets/plateia.png');
 	this.game.load.image('ground'		, 'Assets/ground.png');
     this.game.load.image('player'       , 'Assets/player.png'); //TODO trocar pela imagem do elefante
+    //this.game.load.image('platform'     , 'Assets/wallHorizontal.png'); // TODO trocar pela imagem das girafas
     //spritesheet(key, url, frameWidth, frameHeight, frameMax, margin, spacing)
-    //this.game.load.spritesheet('platform', 'Assets/girafa_sprites.png',);
-    this.game.load.image('platform'     , 'Assets/wallHorizontal.png'); // TODO trocar pela imagem das girafas
+    this.game.load.spritesheet('platform', 'Assets/girafas_sprites.png', 174, 77, 1);
     this.game.load.image('cannon'       , 'Assets/cannon.png');
     this.game.load.image('cannon_base'  , 'Assets/cannon_basis.png');
        
@@ -28,7 +28,9 @@ FunctionsGame.prototype.preload = function() {
     this.game.load.image('bgGameOver'   , 'Assets/game_over_screen.png');
     this.game.load.image('restart'      , 'Assets/button_back_off.png');
     this.game.load.image('bgCredits'    , 'Assets/credits_screen.png');    
-    this.game.load.image('bgSplash'     , 'Assets/splash_screen.png');    
+    this.game.load.image('bgSplash'     , 'Assets/splash_screen.png');
+  
+    
     
     this.game.load.audio('music_menu', ['assets/audio/Super Circus_01.ogg']);
     this.game.load.audio('music_game', ['assets/audio/Circus Tent_01.ogg']);

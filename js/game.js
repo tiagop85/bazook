@@ -3,6 +3,7 @@
 var GameState = function (game) {};
 
 GameState.prototype.preload = function () {
+    
 };
 
 GameState.prototype.create = function () {
@@ -85,7 +86,9 @@ GameState.prototype.create = function () {
     this.player.body.bounce.set(1);
         
 //plataforma
-    this.platform = this.game.add.sprite(300, 400, 'platform');
+    this.platform = this.game.add.sprite(300, 300, 'platform');
+    this.platform.animations.add('walk');
+    this.platform.animations.play('walk', 60, true);
     this.game.physics.enable(this.platform);
     this.platform.body.immovable = true;
     
@@ -99,6 +102,7 @@ GameState.prototype.create = function () {
         
     game.global.score = 0
     this.textScore = this.game.add.text(160, 12, game.global.score, {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "right"});
+    this.textScore.anchor.x = 0.5;    
    
     this.menu = this.game.add.sprite(10, 10, 'menu')
     this.menu.scale.x = 1.1
@@ -195,7 +199,9 @@ GameState.prototype.update = function () {
     else if (this.rightKey.isDown && this.GAME_STATUS != -1) {
         this.platform.body.velocity.x = this.PLATFORM_SPEED;
     }
-        
+    else if (this.GAME_STATUS != 2){
+        this.platform.body.velocity.x = 0;
+    }        
 };
 
 GameState.prototype.platformCollision = function (player, platform) {
