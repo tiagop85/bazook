@@ -52,7 +52,6 @@ GameState.prototype.create = function () {
     this.cenarioItems.enableBody = true;
 
 //canhão
-    //TODO: fixar ponto de giro na base do canhão, pois o movimento ta estranho
     this.cannon = this.cenarioItems.create(85, 417, 'cannon');
     this.cannon.scale.x = 0.45;
     this.cannon.scale.y = 0.45;
@@ -100,7 +99,6 @@ GameState.prototype.create = function () {
     game.global.score = 0
     this.textScore = this.game.add.text(110, 40, game.global.score, {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "right"});
    
-//TODO: ao clicar nos botoes de HUD, o canhao esta disparando tbm        
     this.menu = this.game.add.sprite(10, 10, 'menu')
     this.menu.scale.x = 1.1
     this.menu.scale.y = 1.1
@@ -139,15 +137,9 @@ GameState.prototype.update = function () {
         this.player.body.velocity.y = 0;
         this.cenarioItems.setAll("body.velocity.x",0);
         this.platform.body.velocity.x = 0;
-        //TODO: restart        
-//        var timeCheck = game.time.now;
-        
-        this.game.state.start('lose');
+        //TODO: restart? creio que nao                    
+        this.game.time.events.add(Phaser.Timer.SECOND * 2, gotoLose, this);
     }
-
-//    if ((this.GAME_STATUS == -1) && (game.time.now timeCheck >= 3)) {
-//        this.game.state.start('lose');
-//    }    
     
 //colisões
     this.game.physics.arcade.collide(this.player, this.platform, this.platformCollision, null, this);
@@ -172,7 +164,6 @@ GameState.prototype.update = function () {
         //TODO: trocar por velocidade no eixo X
         this.mountainsBack.tilePosition.x -= 0.3;
         this.foreground.tilePosition.x -= 1;
-//        this.mountainsMid2.tilePosition.x -= 0.75;
         
         //setando velocidade da plataforma
         this.platform.body.velocity.x = this.CENARIO_SPEED;

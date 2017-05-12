@@ -14,9 +14,15 @@ LoseState.prototype.create = function() {
     this.menu.inputEnabled = true;
     this.menu.events.onInputDown.add(gotoMenu, this);
     
-    this.restart = this.game.add.sprite(393, 355, 'restart')
-    this.restart.scale.x = 1.3
-    this.restart.scale.y = 1.3
+    this.sound = this.game.add.sprite(785, 10, game.global.sound_sprite)
+    this.sound.scale.x = 1.1
+    this.sound.scale.y = 1.1
+    this.sound.inputEnabled = true;
+    this.sound.events.onInputDown.add(setarSound, this);       
+    
+    this.restart = this.game.add.sprite(390, 350, 'restart')
+    this.restart.scale.x = 1.5
+    this.restart.scale.y = 1.5
     this.restart.inputEnabled = true;
     this.restart.events.onInputDown.add(gotoGame, this);
 

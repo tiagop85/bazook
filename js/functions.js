@@ -50,6 +50,10 @@ function gotoCredits(item) {
     this.game.state.start("credits");
 };
 
+function gotoLose(item) {
+    this.game.state.start('lose');
+};
+
 function setarSound(item) {
     if (game.sound.mute) {
         game.sound.mute = false;
