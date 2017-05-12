@@ -10,6 +10,9 @@ FunctionsGame.prototype.preload = function() {
     this.game.load.image('sound_on'     , 'Assets/button_sound_on.png');
     this.game.load.image('sound_off'    , 'Assets/button_sound_off.png');    
     this.game.load.image('bgGameCirco'  , 'Assets/background_01.png');
+    this.game.load.image('bgTopCirco'   , 'Assets/topo_background.png');
+    this.game.load.image('bgCabecalho'  , 'Assets/head_bazook.png');
+    this.game.load.image('bgCortina'    , 'Assets/cortina.png');
 	this.game.load.image('foreground'	, 'Assets/plateia.png');
 	this.game.load.image('ground'		, 'Assets/ground.png');
     this.game.load.image('player'       , 'Assets/player.png'); //TODO trocar pela imagem do elefante
@@ -20,7 +23,6 @@ FunctionsGame.prototype.preload = function() {
     this.game.load.image('cannon_base'  , 'Assets/cannon_basis.png');
        
     this.game.load.image('menu'         , 'Assets/button_home_on.png');
-    this.game.load.image('score'        , 'Assets/score.png');
     this.game.load.image('pause'        , 'Assets/button_pause.png');
     this.game.load.image('play'         , 'Assets/button_play.png');
     this.game.load.image('bgGameOver'   , 'Assets/game_over_screen.png');

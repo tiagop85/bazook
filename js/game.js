@@ -38,14 +38,23 @@ GameState.prototype.create = function () {
         this.game.cache.getImage('bgGameCirco').height, 
         'bgGameCirco'
     );
-     this.groundParallax = this.game.add.tileSprite(0, 
+    
+    this.cabecalho = this.game.add.sprite(0,0, 'bgCabecalho');
+    this.cabecalho.scale.y = 0.7;
+    
+    this.mountainsBack = this.game.add.tileSprite(0,
+        this.cabecalho.height,
+        //this.game.height - this.game.cache.getImage('bgTopCirco').height, 
+        this.game.width, 
+        this.game.cache.getImage('bgTopCirco').height, 
+        'bgTopCirco'
+    );
+    this.groundParallax = this.game.add.tileSprite(0, 
         this.game.height - this.game.cache.getImage('ground').height, 
         this.game.width, 
         this.game.cache.getImage('ground').height, 
         'ground'
-    );
- 
-    
+    );   
 
 //cenário
     this.cenarioItems = this.game.add.group();
@@ -63,9 +72,7 @@ GameState.prototype.create = function () {
     this.cannon_base.scale.y = 0.45;
     
     this.cenarioItems.setAll("body.velocity.x",0); 
-    
-       
-    
+        
 //player
     this.player = this.game.add.sprite(this.cannon.x, this.cannon.y, 'player');
     this.player.anchor.setTo(0.5, 0.5);
@@ -89,15 +96,9 @@ GameState.prototype.create = function () {
         this.game.cache.getImage('foreground').height, 
         'foreground'
     );
-    
-    
-//score
-    this.scorebg = this.game.add.sprite(10,10,'score')
-    this.scorebg.scale.x = 0.8
-    this.scorebg.scale.y = 0.8
-    
+        
     game.global.score = 0
-    this.textScore = this.game.add.text(110, 40, game.global.score, {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "right"});
+    this.textScore = this.game.add.text(160, 12, game.global.score, {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "right"});
    
     this.menu = this.game.add.sprite(10, 10, 'menu')
     this.menu.scale.x = 1.1
@@ -125,6 +126,10 @@ GameState.prototype.create = function () {
     this.rightKey = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
 
 //    console.debug("score: " + this.score);
+    
+    this.cortina = this.game.add.sprite(0,0, 'bgCortina');
+    this.game.physics.enable(this.cortina);
+    this.cortina.body.velocity.y = -400;
 };
 
 GameState.prototype.update = function () {
@@ -147,7 +152,7 @@ GameState.prototype.update = function () {
 //movimentação canhão
     this.rotacao = this.game.physics.arcade.angleToPointer(this.cannon)
     //limitando ângulo rotação
-    if(this.rotacao >= -1.5 && this.rotacao <= -0.2){
+    if(this.rotacao >= -1.5 && this.rotacao <= -0.35){
         this.cannon.rotation = this.rotacao;
     }
     
