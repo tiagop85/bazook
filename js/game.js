@@ -86,9 +86,9 @@ GameState.prototype.create = function () {
     this.player.body.bounce.set(1);
         
 //plataforma
-    this.platform = this.game.add.sprite(300, 300, 'platform');
+    this.platform = this.game.add.sprite(300, 350, 'platform');
     this.platform.animations.add('walk');
-    this.platform.animations.play('walk', 60, true);
+    this.platform.animations.play('walk', 12, true);
     this.game.physics.enable(this.platform);
     this.platform.body.immovable = true;
     
@@ -170,10 +170,9 @@ GameState.prototype.update = function () {
         this.player.body.position.x = this.PLAYER_POSITION;
         
         //parallax
-        //TODO: trocar por velocidade no eixo X
-        this.fundoCirco.tilePosition.x -= 5;
-        this.topCirco.tilePosition.x -= 5;
-        this.plateia.tilePosition.x -= 5;
+        this.fundoCirco.tilePosition.x -= this.PLATFORM_SPEED/150;
+        this.topCirco.tilePosition.x -= this.PLATFORM_SPEED/150;
+        this.plateia.tilePosition.x -= this.PLATFORM_SPEED/300;
         
         //setando velocidade da plataforma
         this.platform.body.velocity.x = this.CENARIO_SPEED;
