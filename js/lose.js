@@ -20,9 +20,9 @@ LoseState.prototype.create = function() {
     this.sound.inputEnabled = true;
     this.sound.events.onInputDown.add(setarSound, this);       
     
-    this.restart = this.game.add.sprite(390, 350, 'restart')
-    this.restart.scale.x = 1.5
-    this.restart.scale.y = 1.5
+    this.restart = this.game.add.sprite(400, 360, 'restart')
+    this.restart.scale.x = 1.1
+    this.restart.scale.y = 1.1
     this.restart.inputEnabled = true;
     this.restart.events.onInputDown.add(gotoGame, this);
 
