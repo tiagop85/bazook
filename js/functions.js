@@ -50,18 +50,33 @@ FunctionsGame.prototype.update = function() {
 
 
 function gotoGame(item) {
+    this.button_click = this.game.add.music = this.add.audio('button_click');        
+    this.button_click.play();    
     this.game.state.start("game");
 };
 
 function gotoCredits(item) {
+    this.button_click = this.game.add.music = this.add.audio('button_click');        
+    this.button_click.play();    
     this.game.state.start("credits");
 };
 
 function gotoLose(item) {
+    this.button_click = this.game.add.music = this.add.audio('button_click');        
+    this.button_click.play();    
     this.game.state.start('lose');
 };
 
+function gotoMenu(item) {
+    this.button_click = this.game.add.music = this.add.audio('button_click');        
+    this.button_click.play();    
+    game.paused = false;
+    this.game.state.start("menu");
+};
+
 function setarSound(item) {
+    this.button_switch = this.game.add.music = this.add.audio('button_switch');        
+    this.button_switch.play();
     if (game.sound.mute) {
         game.sound.mute = false;
         game.global.sound_sprite = 'sound_on';
@@ -72,11 +87,6 @@ function setarSound(item) {
         game.global.sound_sprite = 'sound_off';
         this.sound.loadTexture('sound_off');
     }    
-};
-
-function gotoMenu(item) {
-    game.paused = false;
-    this.game.state.start("menu");
 };
 
 function setarPause(item) {
