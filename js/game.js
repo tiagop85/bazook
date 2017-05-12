@@ -156,7 +156,7 @@ GameState.prototype.create = function () {
     
     this.cortina = this.game.add.sprite(0,0, 'bgCortina');
     this.game.physics.enable(this.cortina);
-    this.cortina.body.velocity.y = -400;
+    this.cortina.body.velocity.y = -650;
 
     this.tambores.loopFull();   
 };
@@ -182,6 +182,8 @@ GameState.prototype.update = function () {
         this.platform.body.velocity.x = 0;
         //TODO: restart? creio que nao                    
         this.game.time.events.add(Phaser.Timer.SECOND * 1.5, gotoLose, this);
+        var gray = game.add.filter('Gray');
+        game.world.filters = [gray];        
     }
     
 //colisões
