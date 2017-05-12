@@ -23,7 +23,7 @@ GameState.prototype.create = function () {
         game.sound.stopAll();
         this.music_game = this.game.add.music = this.add.audio('music_game');        
         this.music_game.loopFull();        
-        this.music_game.volume = 100;   
+//        this.music_game.volume = 100;   
     }    
     
     game.paused = false;  
@@ -33,7 +33,7 @@ GameState.prototype.create = function () {
     this.game.stage.backgroundColor = "#5c82bc";
     
 //background
-     this.mountainsBack = this.game.add.tileSprite(0, 
+     this.fundoCirco = this.game.add.tileSprite(0, 
         this.game.height - this.game.cache.getImage('bgGameCirco').height, 
         this.game.width, 
         this.game.cache.getImage('bgGameCirco').height, 
@@ -43,14 +43,14 @@ GameState.prototype.create = function () {
     this.cabecalho = this.game.add.sprite(0,0, 'bgCabecalho');
     this.cabecalho.scale.y = 0.7;
     
-    this.mountainsBack = this.game.add.tileSprite(0,
+    this.topCirco = this.game.add.tileSprite(0,
         this.cabecalho.height,
         //this.game.height - this.game.cache.getImage('bgTopCirco').height, 
         this.game.width, 
         this.game.cache.getImage('bgTopCirco').height, 
         'bgTopCirco'
     );
-    this.groundParallax = this.game.add.tileSprite(0, 
+    this.ground = this.game.add.tileSprite(0, 
         this.game.height - this.game.cache.getImage('ground').height, 
         this.game.width, 
         this.game.cache.getImage('ground').height, 
@@ -92,12 +92,12 @@ GameState.prototype.create = function () {
     this.game.physics.enable(this.platform);
     this.platform.body.immovable = true;
     
-//Foreground plateia   
-    this.foreground = this.game.add.tileSprite(0, 
-        this.game.height - this.game.cache.getImage('foreground').height, 
+//plateia   
+    this.plateia = this.game.add.tileSprite(0, 
+        this.game.height - this.game.cache.getImage('bgPlateia').height, 
         this.game.width, 
-        this.game.cache.getImage('foreground').height, 
-        'foreground'
+        this.game.cache.getImage('bgPlateia').height, 
+        'bgPlateia'
     );
         
     game.global.score = 0
@@ -171,8 +171,9 @@ GameState.prototype.update = function () {
         
         //parallax
         //TODO: trocar por velocidade no eixo X
-        this.mountainsBack.tilePosition.x -= 0.3;
-        this.foreground.tilePosition.x -= 1;
+        this.fundoCirco.tilePosition.x -= 5;
+        this.topCirco.tilePosition.x -= 5;
+        this.plateia.tilePosition.x -= 5;
         
         //setando velocidade da plataforma
         this.platform.body.velocity.x = this.CENARIO_SPEED;

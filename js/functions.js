@@ -13,7 +13,7 @@ FunctionsGame.prototype.preload = function() {
     this.game.load.image('bgTopCirco'   , 'Assets/topo_background.png');
     this.game.load.image('bgCabecalho'  , 'Assets/head_bazook.png');
     this.game.load.image('bgCortina'    , 'Assets/cortina.png');
-	this.game.load.image('foreground'	, 'Assets/plateia.png');
+	this.game.load.image('bgPlateia'	, 'Assets/plateia.png');
 	this.game.load.image('ground'		, 'Assets/ground.png');
     this.game.load.image('player'       , 'Assets/player.png'); //TODO trocar pela imagem do elefante
     //this.game.load.image('platform'     , 'Assets/wallHorizontal.png'); // TODO trocar pela imagem das girafas
@@ -32,9 +32,12 @@ FunctionsGame.prototype.preload = function() {
   
     
     
-    this.game.load.audio('music_menu', ['assets/audio/Super Circus_01.ogg']);
-    this.game.load.audio('music_game', ['assets/audio/Circus Tent_01.ogg']);
+    this.game.load.audio('music_menu',    ['assets/audio/Super Circus_01.ogg']);
+    this.game.load.audio('music_game',    ['assets/audio/Circus Tent_01.ogg']);
     
+    this.game.load.audio('button_click' , ['assets/audio/Button-SoundBible.com-1420500901_01.ogg']);
+    this.game.load.audio('button_switch', ['assets/audio/Switch-SoundBible.com-350629905_01.ogg']);
+
     game.sound.mute = false;
 };
 
@@ -76,12 +79,15 @@ function gotoMenu(item) {
     this.game.state.start("menu");
 };
 
-function setarPause(item) {    
+function setarPause(item) {
+    this.button_switch = this.game.add.music = this.add.audio('button_switch');        
+    this.button_switch.play();
     if (game.paused) {
         game.paused = false;
         this.pause.loadTexture('pause');
     }
     else {
+//    while (this.button_switch.isPlaying){}
         game.paused = true;
         this.pause.loadTexture('play');
     }        

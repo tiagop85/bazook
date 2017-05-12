@@ -11,7 +11,7 @@ MenuState.prototype.create = function() {
         game.sound.stopAll();    
         this.music_menu = this.game.add.music = this.add.audio('music_menu');        
         this.music_menu.loopFull();        
-        this.music_menu.volume = 100;   
+//        this.music_menu.volume = 100;   
     }
     
     this.game.add.sprite(0,0, 'bgMenu')
