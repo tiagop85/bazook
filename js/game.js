@@ -3,6 +3,7 @@
 var GameState = function (game) {};
 
 GameState.prototype.preload = function () {
+    
 };
 
 GameState.prototype.create = function () {
@@ -79,6 +80,8 @@ GameState.prototype.create = function () {
         
 //plataforma
     this.platform = this.game.add.sprite(300, 400, 'platform');
+    this.platform.animations.add('walk');
+    this.platform.animations.play('walk', 60, true);
     this.game.physics.enable(this.platform);
     this.platform.body.immovable = true;
     
@@ -92,12 +95,14 @@ GameState.prototype.create = function () {
     
     
 //score
-    this.scorebg = this.game.add.sprite(10,10,'score')
-    this.scorebg.scale.x = 0.8
-    this.scorebg.scale.y = 0.8
+    this.scorebg = this.game.add.sprite(420, 10, 'score');
+    this.scorebg.scale.x = 0.8;
+    this.scorebg.scale.y = 0.8;
+    this.scorebg.anchor.x = 0.5;
     
     game.global.score = 0
-    this.textScore = this.game.add.text(110, 40, game.global.score, {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "right"});
+    this.textScore = this.game.add.text(420, 45, game.global.score, {font: "bold 30px Arial", fill: "#fff", boundsAlignH: "right"});
+    this.textScore.anchor.x = 0.5;
    
     this.menu = this.game.add.sprite(10, 10, 'menu')
     this.menu.scale.x = 1.1
