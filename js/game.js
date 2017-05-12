@@ -62,13 +62,13 @@ GameState.prototype.create = function () {
     this.cenarioItems.enableBody = true;
 
 //canhão
-    this.cannon = this.cenarioItems.create(85, 417, 'cannon');
+    this.cannon = this.cenarioItems.create(85, 417-37, 'cannon');
     this.cannon.scale.x = 0.45;
     this.cannon.scale.y = 0.45;
     this.cannon.anchor.x = 0.19;
     this.cannon.anchor.y = 0.59;
     this.cannon.angle = -45;
-    this.cannon_base = this.cenarioItems.create(57, 410, 'cannon_base');
+    this.cannon_base = this.cenarioItems.create(57, 410-37, 'cannon_base');
     this.cannon_base.scale.x = 0.45;
     this.cannon_base.scale.y = 0.45;
     
@@ -89,13 +89,13 @@ GameState.prototype.create = function () {
         
 //plataforma
     
-    this.girafas = this.game.add.sprite(300, 390, 'girafas');
+    this.girafas = this.game.add.sprite(300, 380, 'girafas');
     this.girafas.animations.add('walk');
     this.girafas.animations.play('walk', 12, true);
     this.girafas.anchor.x = 0.5;
     this.girafas.anchor.y = 0.5;
     
-    this.platform = this.game.add.sprite(300, 390, 'plataforma');
+    this.platform = this.game.add.sprite(300, 380, 'plataforma');
     this.platform.scale.x = 0.55;
     this.platform.anchor.x = 0.5;
     this.platform.anchor.y = 0.5;
@@ -150,7 +150,7 @@ GameState.prototype.create = function () {
 
 GameState.prototype.update = function () {
 //condicao de derrota
-    if (this.player.y > 420 && this.GAME_STATUS > 0 ){
+    if (this.player.y > 380 && this.GAME_STATUS > 0 ){
         this.caiu_chao = this.game.add.music = this.add.audio('caiu_chao');        
         this.caiu_chao.play(); 
         //setando game status 
@@ -173,7 +173,7 @@ GameState.prototype.update = function () {
 //movimentação canhão
     this.rotacao = this.game.physics.arcade.angleToPointer(this.cannon)
     //limitando ângulo rotação
-    if(this.rotacao >= -1.5 && this.rotacao <= -0.35){
+    if(this.rotacao >= -1.5 && this.rotacao <= -0.2){
         this.cannon.rotation = this.rotacao;
     }
     
@@ -279,7 +279,7 @@ GameState.prototype.shootCannon = function () {
     this.GAME_STATUS = 1;
 
     // Set the bullet position to the gun position.
-    this.player.reset(this.cannon.x, this.cannon.y);
+    this.player.reset(this.cannon.x+30, this.cannon.y-30);
     this.player.rotation = this.cannon.rotation;
     this.player.visible = true;
 
