@@ -67,7 +67,7 @@ FunctionsGame.prototype.update = function() {
 function gotoGame(item) {
     this.button_click = this.game.add.music = this.add.audio('button_click');        
     this.button_click.play();
-    this.game.time.events.add(Phaser.Timer.SECOND * 1, startGame, this);
+    this.game.time.events.add(Phaser.Timer.SECOND * 0.2, startGame, this);
 };
 
 function startGame() {
@@ -89,7 +89,7 @@ function gotoMenu(item) {
     this.button_click = this.game.add.music = this.add.audio('button_click');
     if (this.game.state.current !== "splash") this.button_click.play();    
     game.paused = false;
-    this.game.time.events.add(Phaser.Timer.SECOND * 1, startMenu, this);
+    this.game.time.events.add(Phaser.Timer.SECOND * 0.2, startMenu, this);
 };
 
 function startMenu() {
@@ -119,8 +119,11 @@ function setarPause(item) {
         this.pause.loadTexture('pause');
     }
     else {
-//    while (this.button_switch.isPlaying){}
-        game.paused = true;
-        this.pause.loadTexture('play');
+        this.game.time.events.add(Phaser.Timer.SECOND * 0.2, startPause, this);
     }        
+};
+
+function startPause() {
+    this.pause.loadTexture('play');
+    game.paused = true;
 };
