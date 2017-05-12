@@ -33,7 +33,7 @@ GameState.prototype.create = function () {
     this.game.stage.backgroundColor = "#5c82bc";
     
 //background
-     this.mountainsBack = this.game.add.tileSprite(0, 
+     this.background0 = this.game.add.tileSprite(0, 
         this.game.height - this.game.cache.getImage('bgGameCirco').height, 
         this.game.width, 
         this.game.cache.getImage('bgGameCirco').height, 
@@ -43,7 +43,7 @@ GameState.prototype.create = function () {
     this.cabecalho = this.game.add.sprite(0,0, 'bgCabecalho');
     this.cabecalho.scale.y = 0.7;
     
-    this.mountainsBack = this.game.add.tileSprite(0,
+    this.background1 = this.game.add.tileSprite(0,
         this.cabecalho.height,
         //this.game.height - this.game.cache.getImage('bgTopCirco').height, 
         this.game.width, 
@@ -171,8 +171,9 @@ GameState.prototype.update = function () {
         
         //parallax
         //TODO: trocar por velocidade no eixo X
-        this.mountainsBack.tilePosition.x -= 0.3;
-        this.foreground.tilePosition.x -= 1;
+        this.background0.tilePosition.x -= this.PLATFORM_SPEED/600;
+        this.background1.tilePosition.x -= this.PLATFORM_SPEED/400;
+        this.foreground.tilePosition.x -= this.PLATFORM_SPEED/200;
         
         //setando velocidade da plataforma
         this.platform.body.velocity.x = this.CENARIO_SPEED;
