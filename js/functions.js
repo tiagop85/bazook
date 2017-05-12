@@ -15,7 +15,7 @@ FunctionsGame.prototype.preload = function() {
     this.game.load.image('bgCortina'    , 'Assets/cortina.png');
 	this.game.load.image('bgPlateia'	, 'Assets/plateia.png');
 	this.game.load.image('ground'		, 'Assets/ground.png');
-    this.game.load.image('player'       , 'Assets/elefante_sprites.png'); //TODO trocar pela imagem do elefante
+    this.game.load.spritesheet('player' , 'Assets/elefantes_99x85.png', 99, 85, 2);
     this.game.load.spritesheet('girafas', 'Assets/girafas_174x77.png', 174, 77, 9);
     this.game.load.image('plataforma'	, 'Assets/invisible_platform.png');
     this.game.load.image('cannon'       , 'Assets/cannon.png');
@@ -66,7 +66,11 @@ FunctionsGame.prototype.update = function() {
 
 function gotoGame(item) {
     this.button_click = this.game.add.music = this.add.audio('button_click');        
-    this.button_click.play();    
+    this.button_click.play();
+    this.game.time.events.add(Phaser.Timer.SECOND * 1, startGame, this);
+};
+
+function startGame() {
     this.game.state.start("game");
 };
 
@@ -77,15 +81,18 @@ function gotoCredits(item) {
 };
 
 function gotoLose(item) {
-    this.button_click = this.game.add.music = this.add.audio('button_click');        
-    this.button_click.play();    
     this.game.state.start('lose');
 };
 
+
 function gotoMenu(item) {
-    this.button_click = this.game.add.music = this.add.audio('button_click');        
-    this.button_click.play();    
+    this.button_click = this.game.add.music = this.add.audio('button_click');
+    if (this.game.state.current !== "splash") this.button_click.play();    
     game.paused = false;
+    this.game.time.events.add(Phaser.Timer.SECOND * 1, startMenu, this);
+};
+
+function startMenu() {
     this.game.state.start("menu");
 };
 

@@ -111,7 +111,7 @@ GameState.prototype.create = function () {
     );
         
     game.global.score = 0
-    this.textScore = this.game.add.text(160, 12, game.global.score, {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "right"});
+    this.textScore = this.game.add.text(180, 10, game.global.score, {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "right"});
     this.textScore.anchor.x = 0.5;    
    
     this.menu = this.game.add.sprite(10, 10, 'menu')
@@ -164,7 +164,7 @@ GameState.prototype.update = function () {
         this.girafas.animations.stop(null, true);
         this.platform.body.velocity.x = 0;
         //TODO: restart? creio que nao                    
-        this.game.time.events.add(Phaser.Timer.SECOND * 2, gotoLose, this);
+        this.game.time.events.add(Phaser.Timer.SECOND * 1.5, gotoLose, this);
     }
     
 //colisões
@@ -252,6 +252,7 @@ GameState.prototype.platformCollision = function (player, platform) {
         this.textScore.setText(game.global.score);
         //TODO: random speed Y
         this.player.body.velocity.y = this.PLAYER_VEL_Y;
+        this.player.frame = 1;
         this.game.add.tween(this.player).to({angle:360}, 500, Phaser.Easing.Quadratic.Out).start();
         
         if (game.global.score % 4 == 0 ){

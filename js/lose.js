@@ -6,9 +6,6 @@ LoseState.prototype.preload = function() {
 };
 
 LoseState.prototype.create = function() {
-    this.aplausos = this.game.add.music = this.add.audio('aplausos');        
-    this.aplausos.play();   
-
     this.game.add.sprite(0,0, 'bgGameOver')
 
     this.menu = this.game.add.sprite(10, 10, 'menu')
@@ -29,7 +26,10 @@ LoseState.prototype.create = function() {
     this.restart.inputEnabled = true;
     this.restart.events.onInputDown.add(gotoGame, this);
 
-    this.textScore = this.game.add.text(420, 290, game.global.score, {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center"});    
+    this.textScore = this.game.add.text(410, 290, game.global.score, {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center"});    
+
+    this.aplausos = this.game.add.music = this.add.audio('aplausos');        
+    this.aplausos.play();   
 };
 
 LoseState.prototype.update = function() {
