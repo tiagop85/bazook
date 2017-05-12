@@ -26,7 +26,7 @@ LoseState.prototype.create = function() {
     this.restart.inputEnabled = true;
     this.restart.events.onInputDown.add(gotoGame, this);
 
-    this.textScore = this.game.add.text(420, 290, game.global.score, {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center"});    
+    this.textScore = this.game.add.text(410, 290, game.global.score, {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center"});    
 };
 
 LoseState.prototype.update = function() {
