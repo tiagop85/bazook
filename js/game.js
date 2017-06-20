@@ -8,6 +8,7 @@ GameState.prototype.preload = function () {
 };
 
 GameState.prototype.create = function () {
+
 //constantes
     this.SHOT_SPEED = 750;
     this.PLAYER_GRAVITY = 1250;
@@ -166,10 +167,10 @@ GameState.prototype.update = function () {
         //setando game status 
         this.GAME_STATUS = -1;
 
-        this.caiu_chao = this.game.add.music = this.add.audio('caiu_chao');        
+        this.caiu_chao = this.game.add.music = this.add.audio('caiu_chao');         
         this.caiu_chao.play(); 
         
-        addQuake();
+        addQuake(this.cortina);
         
         //parando os componentes da tela
         this.player.body.velocity.x = 0;
@@ -179,10 +180,20 @@ GameState.prototype.update = function () {
         this.cenarioItems.setAll("body.velocity.x",0);
         this.girafas.animations.stop(null, true);
         this.platform.body.velocity.x = 0;
-        //TODO: restart? creio que nao                    
-        this.game.time.events.add(Phaser.Timer.SECOND * 1.5, gotoLose, this);
-        var gray = game.add.filter('Gray');
-        game.world.filters = [gray];        
+        //TODO: restart? creio que nao
+
+        this.cortina.y = - this.cortina.height - 100;
+        this.cortina.body.velocity.y = 650;        
+//        
+        this.game.time.events.add(Phaser.Timer.SECOND * 4, gotoLose, this);
+//        this.game.time.events.add(Phaser.Timer.SECOND * 1.5, gotoLose, this);
+//        var gray = game.add.filter('Gray');
+//        game.world.filters = [gray];        
+    }
+    
+    if (this.GAME_STATUS == -1 && this.cortina.y >= 0){
+        this.cortina.y = 0;
+        this.cortina.body.velocity.y = 0;        
     }
     
 //colisões
@@ -210,8 +221,10 @@ GameState.prototype.update = function () {
         this.plateia.tilePosition.x -= this.PLATFORM_SPEED/250;
         
         //setando velocidade da plataforma
-        this.girafas.animations.play('walk', 12, true);
-        this.platform.body.velocity.x = -this.PLATFORM_SPEED;
+//        this.girafas.animations.play('walk', 12, true); IDLE
+//        this.girafas.animations.stop(null, true);
+//        this.platform.body.velocity.x = -this.PLATFORM_SPEED;
+        this.platform.x -= this.PLATFORM_SPEED/100;
     }
 
     if (this.player.x >= this.PLAYER_POSITION && this.GAME_STATUS == 1) {
@@ -225,8 +238,10 @@ GameState.prototype.update = function () {
         this.cenarioItems.setAll("body.velocity.x",-this.PLATFORM_SPEED);
 
         //setando velocidade da plataforma
-        this.girafas.animations.play('walk', 12, true);
-        this.platform.body.velocity.x = -this.PLATFORM_SPEED;
+//        this.girafas.animations.play('walk', 12, true); IDLE
+//        this.girafas.animations.stop(null, true);
+//        this.platform.body.velocity.x = -this.PLATFORM_SPEED;
+        this.platform.x -= this.PLATFORM_SPEED/100;
     }
 
 //movimentação da plataforma (deixar sempre por ultimo)    
@@ -236,7 +251,8 @@ GameState.prototype.update = function () {
 //        if (!this.andando.playing){
 //            this.andando.play();   
 //        }
-        this.platform.body.velocity.x = -this.PLATFORM_SPEED;
+//        this.platform.body.velocity.x = -this.PLATFORM_SPEED;
+        this.platform.x -= this.PLATFORM_SPEED/50;
     } 
     else if (this.rightKey.isDown && this.GAME_STATUS != -1) {
         this.girafas.animations.play('walk', 12, true);
@@ -245,15 +261,24 @@ GameState.prototype.update = function () {
 //            this.andando.play();   
 //        }
         if (this.GAME_STATUS == 2){
-            this.platform.body.velocity.x = this.PLATFORM_SPEED/2.5;
+//            this.platform.body.velocity.x = this.PLATFORM_SPEED/2.5;
+            if (this.PLATFORM_SPEED/40 <= 25){
+                this.platform.x += this.PLATFORM_SPEED/40;
+            }
+            else{
+                this.platform.x += 25;
+            }
         }
         else{
-            this.platform.body.velocity.x = this.PLATFORM_SPEED;
+//            this.platform.body.velocity.x = this.PLATFORM_SPEED;
+            this.platform.x += this.PLATFORM_SPEED/50;
         }
     }
-    else if (this.GAME_STATUS != 2){
-        this.girafas.animations.stop(null, true);
-        this.platform.body.velocity.x = 0;
+    else{ 
+        this.girafas.animations.stop(null, true); //colocar o IDLE 
+        if (this.GAME_STATUS != 2){
+            this.platform.body.velocity.x = 0;
+        }
     }
 // Atualiza a posição das girafas de acordo com a plataforma
     this.girafas.x = this.platform.x;
@@ -313,7 +338,9 @@ GameState.prototype.shootCannon = function () {
     this.player.body.velocity.y = Math.sin(this.player.rotation) * this.SHOT_SPEED;  
 };
 
-function addQuake() {
+function addQuake(cortina) {
+  var gray = game.add.filter('Gray');
+  game.world.filters = [gray];        
   
   // define the camera offset for the quake
   var rumbleOffset = 10;
@@ -338,8 +365,12 @@ function addQuake() {
   var quake = game.add.tween(game.camera).to(properties, duration, ease, autoStart, delay, repeat, yoyo);
   
   // we're using this line for the example to run indefinitely
-  // quake.onComplete.addOnce(addQuake);
+  quake.onComplete.addOnce(removeGray,{cortina: cortina});
   
   // let the earthquake begins
   quake.start();
+}
+
+function removeGray(cortina) {
+  game.world.filters = null;        
 }
