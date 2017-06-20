@@ -4,7 +4,7 @@ var SplashState = function(game) {};
 
 
 SplashState.prototype.preload = function() {
-    if (game.global.music != 1){
+    if (game.global.music != 1 && game.global.music != -1){
         game.global.music = 1;
         game.sound.stopAll();    
         this.music_menu = this.game.add.music = this.add.audio('music_menu');        

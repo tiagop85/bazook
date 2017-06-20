@@ -28,6 +28,11 @@ FunctionsGame.prototype.preload = function() {
     this.game.load.image('restart'      , 'Assets/button_back_off.png');
     this.game.load.image('bgCredits'    , 'Assets/credits_screen.png');    
     this.game.load.image('bgSplash'     , 'Assets/splash_screen.png');
+    
+    this.game.load.image('bgArcade'     , 'Assets/_arcade.png');
+    this.game.load.image('bgFacil'      , 'Assets/_facil.png');
+    this.game.load.image('bgMedio'      , 'Assets/_medio.png');
+    this.game.load.image('bgDificil'    , 'Assets/_dificil.png');
   
     this.game.load.script('gray'        , 'https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/Gray.js');    
     this.game.load.script('BlurX'       , 'https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/BlurX.js');
@@ -63,6 +68,23 @@ FunctionsGame.prototype.create = function() {
 FunctionsGame.prototype.update = function() {
 };
 
+
+function gotoDificuldade(item) {
+    this.button_click = this.game.add.music = this.add.audio('button_click');        
+    this.button_click.play();
+    this.game.time.events.add(Phaser.Timer.SECOND * 0.2, startDificuldade, this);
+};
+
+function startDificuldade() {
+    this.game.state.start("dificuldade");
+};
+
+function gotoDificuldadeFacil(item) {
+    this.button_click = this.game.add.music = this.add.audio('button_click');        
+    this.button_click.play();
+    game.sound.mute = false;
+    this.game.time.events.add(Phaser.Timer.SECOND * 0.2, startGame, this);
+};
 
 function gotoGame(item) {
     this.button_click = this.game.add.music = this.add.audio('button_click');        

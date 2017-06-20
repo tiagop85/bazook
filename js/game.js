@@ -14,12 +14,11 @@ GameState.prototype.create = function () {
     this.PLAYER_VEL_Y = -800;
     this.PLAYER_POSITION = 400;
     this.PLATFORM_SPEED = 300;
-    this.SCORE_GETHARD = 4; //A CADA x pulos a velocidade aumenta
     
 //variáveis
     this.GAME_STATUS = 0; //| 0: pré-partida | 1: lançando player | 2: player lançado | -1: game over | 
     
-    if (game.global.music != 2){
+    if (game.global.music != 2 && game.global.music != -1){
         game.global.music = 2;
         game.sound.stopAll();
         this.music_game = this.game.add.music = this.add.audio('music_game');        
@@ -274,7 +273,7 @@ GameState.prototype.platformCollision = function (player, platform) {
         this.player.frame = 1;
         this.game.add.tween(this.player).to({angle:360}, 500, Phaser.Easing.Quadratic.Out).start();
         
-        if (game.global.score % this.SCORE_GETHARD == 0 ){
+        if (game.global.score % game.global.SCORE_GETHARD == 0 ){
             this.elefante = this.game.add.music = this.add.audio('elefante');        
             this.elefante.play();   
             this.PLATFORM_SPEED = this.PLATFORM_SPEED * 1.2;
@@ -283,7 +282,7 @@ GameState.prototype.platformCollision = function (player, platform) {
             this.player.body.gravity.y = this.PLAYER_GRAVITY; 
         }
         else{
-            if (game.global.score % (this.SCORE_GETHARD*3-2) == 0 ){
+            if (game.global.score % (game.global.SCORE_GETHARD*3-2) == 0 ){
                 this.aplausos = this.game.add.music = this.add.audio('aplausos');        
                 this.aplausos.play();   
             }

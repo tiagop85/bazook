@@ -6,7 +6,7 @@ MenuState.prototype.preload = function() {
 };
 
 MenuState.prototype.create = function() {    
-    if (game.global.music != 1){
+    if (game.global.music != 1 && game.global.music != -1){
         game.global.music = 1;
         game.sound.stopAll();    
         this.music_menu = this.game.add.music = this.add.audio('music_menu');        
@@ -19,7 +19,7 @@ MenuState.prototype.create = function() {
     this.play.scale.x = 1.1
     this.play.scale.y = 1.1
     this.play.inputEnabled = true;
-    this.play.events.onInputDown.add(gotoGame, this);
+    this.play.events.onInputDown.add(gotoDificuldade, this);
     
     this.credits = this.game.add.sprite(450, 400, 'credits')
     this.credits.scale.x = 1.1
