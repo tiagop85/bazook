@@ -6,14 +6,14 @@ game.global = {
     max_scoreF : 0,
     max_scoreM : 0,
     max_scoreD : 0,
-    SCORE_GETHARD = 0, //A CADA x pulos a velocidade aumenta
+    SCORE_GETHARD: 0, //A CADA x pulos a velocidade aumenta
     music : -1,
     sound_sprite: 'sound_on'
 }
 
 game.state.add('functions', FunctionsGame);
 game.state.add('menu', MenuState);
-game.state.add('game', GameState);
+game.state.add('game', GameState); 
 game.state.add('dificuldade', MenuDificuldade);
 game.state.add('credits',CreditsState);
 game.state.add('lose', LoseState);
