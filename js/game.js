@@ -126,6 +126,24 @@ GameState.prototype.create = function () {
     game.global.score = 0
     this.textScore = this.game.add.text(180, 10, game.global.score, {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "right"});
     this.textScore.anchor.x = 0.5;    
+    this.maxScore = this.game.add.text(180, 40, game.global.score, {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "right"});
+    this.maxScore.anchor.x = 0.5;
+    this.amaxScore = this.game.add.text(580, 40, game.global.dificuldade, {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "right"});
+    this.amaxScore.anchor.x = 0.5;
+    if (game.global.dificuldade == 'F'){
+        this.maxScore.text = game.global.max_scoreF;
+    }
+    else{
+        if (game.global.dificuldade == 'M'){
+            this.maxScore.text = game.global.max_scoreM;
+        }
+        else{
+//            if (game.global.dificuldade == 'D' && game.global.score >= game.global.max_scoreD){
+            this.maxScore.text = game.global.max_scoreD;
+        }
+    }
+            
+    
    
     this.menu = this.game.add.sprite(10, 10, 'menu')
     this.menu.scale.x = 1.1
@@ -148,9 +166,13 @@ GameState.prototype.create = function () {
     this.pause.events.onInputDown.add(setarPause, this);        
 
 //teclas
-    this.shootKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    this.shootKey = this.game.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
+    this.pauseKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    this.pauseKey.onDown.add(setarPause, this);
     this.leftKey = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
     this.rightKey = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+    this.upKey = this.game.input.keyboard.addKey(Phaser.Keyboard.UP);
+    this.downKey = this.game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
 
 //    console.debug("score: " + this.score);
     
@@ -185,7 +207,7 @@ GameState.prototype.update = function () {
         this.cortina.y = - this.cortina.height - 100;
         this.cortina.body.velocity.y = 650;        
 //        
-        this.game.time.events.add(Phaser.Timer.SECOND * 4, gotoLose, this);
+        this.game.time.events.add(Phaser.Timer.SECOND * 3, gotoLose, this);
 //        this.game.time.events.add(Phaser.Timer.SECOND * 1.5, gotoLose, this);
 //        var gray = game.add.filter('Gray');
 //        game.world.filters = [gray];        
@@ -280,6 +302,16 @@ GameState.prototype.update = function () {
             this.platform.body.velocity.x = 0;
         }
     }
+    
+    if (this.upKey.isDown && (this.cannon.rotation-0.1) >= -1.5){
+        this.cannon.rotation -= 0.1;
+    }
+    else{
+        if (this.downKey.isDown && (this.cannon.rotation+0.1) <= -0.2){
+            this.cannon.rotation += 0.1;
+        }        
+    }
+    
 // Atualiza a posição das girafas de acordo com a plataforma
     this.girafas.x = this.platform.x;
     this.girafas.y = this.platform.y;
@@ -292,6 +324,23 @@ GameState.prototype.platformCollision = function (player, platform) {
         
         //TODO: contar apenas se a colisão vier de cima e 1x só mesmo q elefante role na plataforma
         game.global.score++;
+        if (game.global.dificuldade == 'F' && game.global.score >= game.global.max_scoreF){
+            game.global.max_scoreF = game.global.score;
+            this.maxScore.text = game.global.max_scoreF;
+        }
+        else{
+            if (game.global.dificuldade == 'M' && game.global.score >= game.global.max_scoreM){
+                game.global.max_scoreM = game.global.score;
+                this.maxScore.text = game.global.max_scoreM;
+            }
+            else{
+                if (game.global.dificuldade == 'D' && game.global.score >= game.global.max_scoreD){
+                    game.global.max_scoreD = game.global.score;
+                    this.maxScore.text = game.global.max_scoreD;
+                }                
+            }
+        }
+        
         this.textScore.setText(game.global.score);
         //TODO: random speed Y
         this.player.body.velocity.y = this.PLAYER_VEL_Y;

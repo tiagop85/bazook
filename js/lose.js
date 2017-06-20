@@ -29,8 +29,16 @@ LoseState.prototype.create = function() {
     this.restart.inputEnabled = true;
     this.restart.events.onInputDown.add(gotoGame, this);
 
-    this.textScore = this.game.add.text(410, 290, game.global.score, {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center"});    
+    this.textScore = this.game.add.text(410, 290, 0, {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center"});
+    this.game.time.events.add(Phaser.Timer.SECOND * 0.2, contadorScore, this);
 };
 
 LoseState.prototype.update = function() {
 };
+
+function contadorScore() {
+  if (this.textScore.text < game.global.score){
+      this.textScore.text++;
+      this.game.time.events.add(Phaser.Timer.SECOND * 0.05, contadorScore, this);
+  }
+}

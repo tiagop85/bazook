@@ -3,9 +3,9 @@ var game = new Phaser.Game(840, 480, Phaser.AUTO, 'phaser-canvas');
 game.global = {
     dificuldade : '',
     score : 0,
-    max_scoreF : 0,
-    max_scoreM : 0,
-    max_scoreD : 0,
+    max_scoreF : 1,
+    max_scoreM : 2,
+    max_scoreD : 3,
     SCORE_GETHARD: 0, //A CADA x pulos a velocidade aumenta
     music : -1,
     sound_sprite: 'sound_on'

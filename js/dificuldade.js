@@ -17,26 +17,20 @@ MenuDificuldade.prototype.create = function() {
     this.credits = this.game.add.sprite(340, 200, 'bgFacil')
     this.credits.scale.x = 1.1
     this.credits.scale.y = 1.1
-    game.global.dificuldade = 'F';
-    game.global.SCORE_GETHARD = 10;
     this.credits.inputEnabled = true;
-    this.credits.events.onInputDown.add(gotoGame, this);    
+    this.credits.events.onInputDown.add(gotoDificuldadeFacil, this);    
     
     this.credits = this.game.add.sprite(340, 260, 'bgMedio')
     this.credits.scale.x = 1.1
     this.credits.scale.y = 1.1
-    game.global.dificuldade = 'M';
-    game.global.SCORE_GETHARD = 7;
     this.credits.inputEnabled = true;
-    this.credits.events.onInputDown.add(gotoGame, this);    
+    this.credits.events.onInputDown.add(gotoDificuldadeMedio, this);     
     
     this.credits = this.game.add.sprite(340, 320, 'bgDificil')
     this.credits.scale.x = 1.1
     this.credits.scale.y = 1.1
-    game.global.dificuldade = 'D';
-    game.global.SCORE_GETHARD = 5;
     this.credits.inputEnabled = true;
-    this.credits.events.onInputDown.add(gotoGame, this);        
+    this.credits.events.onInputDown.add(gotoDificuldadeDificil, this);        
     
     this.menu = this.game.add.sprite(10, 10, 'menu')
     this.menu.scale.x = 1.1

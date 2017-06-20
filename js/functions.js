@@ -82,7 +82,24 @@ function startDificuldade() {
 function gotoDificuldadeFacil(item) {
     this.button_click = this.game.add.music = this.add.audio('button_click');        
     this.button_click.play();
-    game.sound.mute = false;
+    game.global.dificuldade = 'F';
+    game.global.SCORE_GETHARD = 10;
+    this.game.time.events.add(Phaser.Timer.SECOND * 0.2, startGame, this);
+};
+
+function gotoDificuldadeMedio(item) {
+    this.button_click = this.game.add.music = this.add.audio('button_click');        
+    this.button_click.play();
+    game.global.dificuldade = 'M';
+    game.global.SCORE_GETHARD = 7;
+    this.game.time.events.add(Phaser.Timer.SECOND * 0.2, startGame, this);
+};
+
+function gotoDificuldadeDificil(item) {
+    this.button_click = this.game.add.music = this.add.audio('button_click');        
+    this.button_click.play();
+    game.global.dificuldade = 'D';
+    game.global.SCORE_GETHARD = 5;
     this.game.time.events.add(Phaser.Timer.SECOND * 0.2, startGame, this);
 };
 
