@@ -25,14 +25,16 @@ FunctionsGame.prototype.preload = function() {
     this.game.load.image('pause'        , 'Assets/button_pause.png');
     this.game.load.image('play'         , 'Assets/button_play.png');
     this.game.load.image('bgGameOver'   , 'Assets/game_over_screen.png');
-    this.game.load.image('restart'      , 'Assets/button_back_off.png');
+    this.game.load.image('restart'      , 'Assets/button_back_on.png');
     this.game.load.image('bgCredits'    , 'Assets/credits_screen.png');    
     this.game.load.image('bgSplash'     , 'Assets/splash_screen.png');
+    this.game.load.image('bgGameMode'   , 'Assets/game_mode_screen.png');
     
-    this.game.load.image('bgArcade'     , 'Assets/_arcade.png');
-    this.game.load.image('bgFacil'      , 'Assets/_facil.png');
-    this.game.load.image('bgMedio'      , 'Assets/_medio.png');
-    this.game.load.image('bgDificil'    , 'Assets/_dificil.png');
+    this.game.load.image('GameMode'     , 'Assets/big_button_game_mode_on.png');
+    this.game.load.image('Facil'        , 'Assets/big_button_easy_on.png');
+    this.game.load.image('Medio'        , 'Assets/big_button_medium_on.png');
+    this.game.load.image('Dificil'      , 'Assets/big_button_hard_on.png');
+    this.game.load.image('SpeedUp'      , 'Assets/speed_up.png');
   
     this.game.load.script('gray'        , 'https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/Gray.js');    
     this.game.load.script('BlurX'       , 'https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/BlurX.js');
@@ -51,9 +53,7 @@ FunctionsGame.prototype.preload = function() {
     this.game.load.audio('elefante'     , ['assets/audio/139052__jasher70__elephant-scream_01.ogg']);    
     this.game.load.audio('aplausos'     , ['assets/audio/51743__erkanozan__applause_01.ogg']);    
     
-    
-    
-    
+    this.game.load.bitmapFont('myfont', 'assets/fonts/font.png', 'assets/fonts/font.fnt');        
 /*
     this.aplausos = this.game.add.music = this.add.audio('aplausos');        
     this.aplausos.play();   
@@ -82,7 +82,7 @@ function startDificuldade() {
 function gotoDificuldadeFacil(item) {
     this.button_click = this.game.add.music = this.add.audio('button_click');        
     this.button_click.play();
-    game.global.dificuldade = 'F';
+    game.global.dificuldade = 'EASY';
     game.global.SCORE_GETHARD = 10;
     this.game.time.events.add(Phaser.Timer.SECOND * 0.2, startGame, this);
 };
@@ -90,7 +90,7 @@ function gotoDificuldadeFacil(item) {
 function gotoDificuldadeMedio(item) {
     this.button_click = this.game.add.music = this.add.audio('button_click');        
     this.button_click.play();
-    game.global.dificuldade = 'M';
+    game.global.dificuldade = 'MEDIUM';
     game.global.SCORE_GETHARD = 7;
     this.game.time.events.add(Phaser.Timer.SECOND * 0.2, startGame, this);
 };
@@ -98,7 +98,7 @@ function gotoDificuldadeMedio(item) {
 function gotoDificuldadeDificil(item) {
     this.button_click = this.game.add.music = this.add.audio('button_click');        
     this.button_click.play();
-    game.global.dificuldade = 'D';
+    game.global.dificuldade = 'HARD';
     game.global.SCORE_GETHARD = 5;
     this.game.time.events.add(Phaser.Timer.SECOND * 0.2, startGame, this);
 };

@@ -13,7 +13,7 @@ GameState.prototype.create = function () {
     this.SHOT_SPEED = 750;
     this.PLAYER_GRAVITY = 1250;
     this.PLAYER_VEL_Y = -800;
-    this.PLAYER_POSITION = 400;
+    this.PLAYER_POSITION = 250;
     this.PLATFORM_SPEED = 300;
     
 //variáveis
@@ -124,44 +124,42 @@ GameState.prototype.create = function () {
     );
         
     game.global.score = 0
-    this.textScore = this.game.add.text(180, 10, game.global.score, {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "right"});
+      this.textScore = this.game.add.text(180, 10, game.global.score, {font: "bold 20px myfont", fill: "#fff", boundsAlignH: "left"});
     this.textScore.anchor.x = 0.5;    
-    this.maxScore = this.game.add.text(180, 40, game.global.score, {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "right"});
+    this.maxScore = this.game.add.text(235, 32, game.global.score, {font: "bold 20px myfont", fill: "#fff", boundsAlignH: "right"});
     this.maxScore.anchor.x = 0.5;
-    this.amaxScore = this.game.add.text(580, 40, game.global.dificuldade, {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "right"});
+    this.amaxScore = this.game.add.text(665, 30, game.global.dificuldade, {font: "bold 16px myfont", fill: "#fff", boundsAlignH: "right"});
     this.amaxScore.anchor.x = 0.5;
-    if (game.global.dificuldade == 'F'){
+    if (game.global.dificuldade == 'EASY'){
         this.maxScore.text = game.global.max_scoreF;
     }
     else{
-        if (game.global.dificuldade == 'M'){
+        if (game.global.dificuldade == 'MEDIUM'){
             this.maxScore.text = game.global.max_scoreM;
         }
         else{
-//            if (game.global.dificuldade == 'D' && game.global.score >= game.global.max_scoreD){
+//            if (game.global.dificuldade == 'HARD' && game.global.score >= game.global.max_scoreD){
             this.maxScore.text = game.global.max_scoreD;
         }
-    }
-            
-    
+    }                
    
     this.menu = this.game.add.sprite(10, 10, 'menu')
-    this.menu.scale.x = 1.1
-    this.menu.scale.y = 1.1
+//    this.menu.scale.x = 1.1
+//    this.menu.scale.y = 1.1
     this.menu.inputEnabled = true;
     this.menu.events.onInputDown.add(gotoMenu, this);
 
 //sound
     this.sound = this.game.add.sprite(785, 10, game.global.sound_sprite)
-    this.sound.scale.x = 1.1
-    this.sound.scale.y = 1.1
+//    this.sound.scale.x = 1.1
+//    this.sound.scale.y = 1.1
     this.sound.inputEnabled = true;
     this.sound.events.onInputDown.add(setarSound, this);        
 
 //pause
     this.pause = this.game.add.sprite(735, 10, 'pause')
-    this.pause.scale.x = 1.1
-    this.pause.scale.y = 1.1
+//    this.pause.scale.x = 1.1
+//    this.pause.scale.y = 1.1
     this.pause.inputEnabled = true;
     this.pause.events.onInputDown.add(setarPause, this);        
 
@@ -235,7 +233,8 @@ GameState.prototype.update = function () {
 
     if (this.GAME_STATUS == 2) {
         //fixando eixo X do jogador
-        this.player.body.position.x = this.PLAYER_POSITION;
+        this.player.x = this.PLAYER_POSITION;
+//        this.player.body.position.x = this.PLAYER_POSITION;
         
         //parallax
         this.fundoCirco.tilePosition.x -= this.PLATFORM_SPEED/100;
@@ -254,7 +253,8 @@ GameState.prototype.update = function () {
         this.GAME_STATUS = 2;
         
         //fixando eixo X do jogador
-        this.player.body.position.x = this.PLAYER_POSITION;
+        this.player.x = this.PLAYER_POSITION;
+//        this.player.body.position.x = this.PLAYER_POSITION;
         
         //setando velocidade do canhão
         this.cenarioItems.setAll("body.velocity.x",-this.PLATFORM_SPEED);
@@ -320,21 +320,25 @@ GameState.prototype.update = function () {
 GameState.prototype.platformCollision = function (player, platform) {
     if (this.GAME_STATUS != -1) {         
         this.button_click = this.game.add.music = this.add.audio('pulo_mola');        
-        this.button_click.play();    
+        this.button_click.play();  
         
+//        this.speedUp = this.game.add.sprite(0, 250, 'SpeedUp');
+//        sprite.alpha = 0;
+//        game.add.tween(sprite).to( { alpha: 1 }, 2000, Phaser.Easing.Linear.None, true, 0, 1000, true);
+                    
         //TODO: contar apenas se a colisão vier de cima e 1x só mesmo q elefante role na plataforma
         game.global.score++;
-        if (game.global.dificuldade == 'F' && game.global.score >= game.global.max_scoreF){
+        if (game.global.dificuldade == 'EASY' && game.global.score >= game.global.max_scoreF){
             game.global.max_scoreF = game.global.score;
             this.maxScore.text = game.global.max_scoreF;
         }
         else{
-            if (game.global.dificuldade == 'M' && game.global.score >= game.global.max_scoreM){
+            if (game.global.dificuldade == 'MEDIUM' && game.global.score >= game.global.max_scoreM){
                 game.global.max_scoreM = game.global.score;
                 this.maxScore.text = game.global.max_scoreM;
             }
             else{
-                if (game.global.dificuldade == 'D' && game.global.score >= game.global.max_scoreD){
+                if (game.global.dificuldade == 'HARD' && game.global.score >= game.global.max_scoreD){
                     game.global.max_scoreD = game.global.score;
                     this.maxScore.text = game.global.max_scoreD;
                 }                
@@ -354,6 +358,13 @@ GameState.prototype.platformCollision = function (player, platform) {
             this.PLAYER_VEL_Y = this.PLAYER_VEL_Y * 1.1;
             this.PLAYER_GRAVITY = this.PLAYER_GRAVITY * 1.2;
             this.player.body.gravity.y = this.PLAYER_GRAVITY; 
+
+            this.speedUp = this.game.add.sprite(0, 250, 'SpeedUp');
+            game.time.events.add(150, function() {
+                game.add.tween(this.speedUp).to({y: 0}, 1500, Phaser.Easing.Linear.None, true);    
+                game.add.tween(this.speedUp).to({alpha: 0}, 1500, Phaser.Easing.Linear.None, true);
+            }, this);     
+
         }
         else{
             if (game.global.score % (game.global.SCORE_GETHARD*3-2) == 0 ){

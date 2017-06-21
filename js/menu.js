@@ -16,22 +16,22 @@ MenuState.prototype.create = function() {
     this.game.add.sprite(0,0, 'bgMenu')
     
     this.play = this.game.add.sprite(220, 400, 'start')
-    this.play.scale.x = 1.1
-    this.play.scale.y = 1.1
+//    this.play.scale.x = 1.1
+//    this.play.scale.y = 1.1
     this.play.inputEnabled = true;
     this.play.events.onInputDown.add(gotoDificuldade, this);
     
     this.credits = this.game.add.sprite(450, 400, 'credits')
-    this.credits.scale.x = 1.1
-    this.credits.scale.y = 1.1
+//    this.credits.scale.x = 1.1
+//    this.credits.scale.y = 1.1
     this.credits.inputEnabled = true;
     this.credits.events.onInputDown.add(gotoCredits, this);    
 
     this.sound = this.game.add.sprite(785, 10, game.global.sound_sprite)
-    this.sound.scale.x = 1.1
-    this.sound.scale.y = 1.1
+//    this.sound.scale.x = 1.1
+//    this.sound.scale.y = 1.1 
     this.sound.inputEnabled = true;
-    this.sound.events.onInputDown.add(setarSound, this);    
+    this.sound.events.onInputDown.add(setarSound, this);        
 };
 
 MenuState.prototype.update = function() {
