@@ -29,6 +29,7 @@ FunctionsGame.prototype.preload = function() {
     this.game.load.image('bgCredits'    , 'Assets/credits_screen.png');    
     this.game.load.image('bgSplash'     , 'Assets/splash_screen.png');
     this.game.load.image('bgGameMode'   , 'Assets/game_mode_screen.png');
+    this.game.load.image('bgPauseSreen' , 'Assets/pause_screen.png');
     
     this.game.load.image('GameMode'     , 'Assets/big_button_game_mode_on.png');
     this.game.load.image('Facil'        , 'Assets/big_button_easy_on.png');
@@ -111,6 +112,7 @@ function gotoGame(item) {
 };
 
 function startGame() {
+    game.global.new_record = 0;
     this.game.state.start("game");
 };
 
@@ -127,8 +129,9 @@ function gotoLose(item) {
 
 function gotoMenu(item) {
     this.button_click = this.game.add.music = this.add.audio('button_click');
-    if (this.game.state.current !== "splash") this.button_click.play();    
+    if (this.game.state.current !== "splash") this.button_click.play();     
     game.paused = false;
+    if (this.game.state.current == "game") this.tambores.stop();    
     this.game.time.events.add(Phaser.Timer.SECOND * 0.2, startMenu, this);
 };
 
@@ -159,17 +162,31 @@ function setarPause(item) {
             game.world.filters = null;
             game.paused = false;
             this.pause.loadTexture('pause');
+            
+            game.time.events.add(0, function() {
+                game.add.tween(this.bg_pause).to({alpha: 0}, 10, Phaser.Easing.Linear.None, true);
+            }, this);              
+            
         }
         else {
-            var blurX = game.add.filter('BlurX');
-	       var blurY = game.add.filter('BlurY');
+//            var blurX = game.add.filter('BlurX');
+//	       var blurY = game.add.filter('BlurY');
+//
+//            blurX.blur = 6;
+//            blurY.blur = 6;
+//
+//            game.world.filters = [blurX, blurY];
+            
+//            this.bg_pause = this.game.add.sprite(0,0, 'bgPauseSreen');
+//            this.bg_pausesprite.alpha = 0;
+                
+            game.time.events.add(0, function() {
+                game.add.tween(this.bg_pause).to({alpha: 1}, 10, Phaser.Easing.Linear.None, true);
+            }, this);              
 
-            blurX.blur = 6;
-            blurY.blur = 6;
-
-            game.world.filters = [blurX, blurY];
-        
             this.game.time.events.add(Phaser.Timer.SECOND * 0.2, startPause, this);
+            
+            
         }        
     }
 };

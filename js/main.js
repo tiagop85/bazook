@@ -6,6 +6,7 @@ game.global = {
     max_scoreF : 1,
     max_scoreM : 2,
     max_scoreD : 3,
+    new_record : 0,
     SCORE_GETHARD: 0, //A CADA x pulos a velocidade aumenta
     music : -1,
     sound_sprite: 'sound_on'

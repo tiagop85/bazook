@@ -53,16 +53,6 @@ GameState.prototype.create = function () {
         'bgGameCirco'
     );
     
-    this.topCirco = this.game.add.tileSprite(0,
-        65,
-        //this.game.height - this.game.cache.getImage('bgTopCirco').height, 
-        this.game.width, 
-        this.game.cache.getImage('bgTopCirco').height, 
-        'bgTopCirco'
-    );
-    this.cabecalho = this.game.add.sprite(0,0, 'bgCabecalho');
-    this.cabecalho.scale.y = 0.8;
-
     this.ground = this.game.add.tileSprite(0, 
         this.game.height - this.game.cache.getImage('ground').height, 
         this.game.width, 
@@ -124,12 +114,12 @@ GameState.prototype.create = function () {
     );
         
     game.global.score = 0
-      this.textScore = this.game.add.text(180, 10, game.global.score, {font: "bold 20px myfont", fill: "#fff", boundsAlignH: "left"});
+      this.textScore = this.game.add.text(180, 10, game.global.score, {font: "bold 20px myfont", fill: "#fff", boundsAlignH: "center"});
     this.textScore.anchor.x = 0.5;    
-    this.maxScore = this.game.add.text(235, 32, game.global.score, {font: "bold 20px myfont", fill: "#fff", boundsAlignH: "right"});
+    this.maxScore = this.game.add.text(235, 32, game.global.score, {font: "bold 20px myfont", fill: "#fff", boundsAlignH: "center"});
     this.maxScore.anchor.x = 0.5;
-    this.amaxScore = this.game.add.text(665, 30, game.global.dificuldade, {font: "bold 16px myfont", fill: "#fff", boundsAlignH: "right"});
-    this.amaxScore.anchor.x = 0.5;
+    this.dificuldade = this.game.add.text(600, 30, game.global.dificuldade, {font: "bold 16px myfont", fill: "#fff", boundsAlignH: "left"});
+    this.dificuldade.anchor.x = 0;
     if (game.global.dificuldade == 'EASY'){
         this.maxScore.text = game.global.max_scoreF;
     }
@@ -141,8 +131,24 @@ GameState.prototype.create = function () {
 //            if (game.global.dificuldade == 'HARD' && game.global.score >= game.global.max_scoreD){
             this.maxScore.text = game.global.max_scoreD;
         }
-    }                
-   
+    }          
+    
+    
+    this.bg_pause = this.game.add.sprite(0,0, 'bgPauseSreen');
+    this.bg_pause.alpha = 0;
+    
+ 
+    this.topCirco = this.game.add.tileSprite(0, 
+        65,
+        //this.game.height - this.game.cache.getImage('bgTopCirco').height, 
+        this.game.width, 
+        this.game.cache.getImage('bgTopCirco').height, 
+        'bgTopCirco'
+    );
+
+    this.cabecalho = this.game.add.sprite(0,0, 'bgCabecalho');
+    this.cabecalho.scale.y = 0.8;
+
     this.menu = this.game.add.sprite(10, 10, 'menu')
 //    this.menu.scale.x = 1.1
 //    this.menu.scale.y = 1.1
@@ -179,12 +185,12 @@ GameState.prototype.create = function () {
     this.cortina.body.velocity.y = -650;
 
     this.tambores.loopFull();   
-};
+    };
 
 GameState.prototype.update = function () {
 //condicao de derrota
     if (this.player.y > 380 && this.GAME_STATUS > 0 ){
-        //setando game status 
+        //setando game status  
         this.GAME_STATUS = -1;
 
         this.caiu_chao = this.game.add.music = this.add.audio('caiu_chao');         
@@ -328,19 +334,22 @@ GameState.prototype.platformCollision = function (player, platform) {
                     
         //TODO: contar apenas se a colisão vier de cima e 1x só mesmo q elefante role na plataforma
         game.global.score++;
-        if (game.global.dificuldade == 'EASY' && game.global.score >= game.global.max_scoreF){
+        if (game.global.dificuldade == 'EASY' && game.global.score > game.global.max_scoreF){
             game.global.max_scoreF = game.global.score;
             this.maxScore.text = game.global.max_scoreF;
+            game.global.new_record = 1;
         }
         else{
-            if (game.global.dificuldade == 'MEDIUM' && game.global.score >= game.global.max_scoreM){
+            if (game.global.dificuldade == 'MEDIUM' && game.global.score > game.global.max_scoreM){
                 game.global.max_scoreM = game.global.score;
                 this.maxScore.text = game.global.max_scoreM;
+                game.global.new_record = 1;
             }
             else{
-                if (game.global.dificuldade == 'HARD' && game.global.score >= game.global.max_scoreD){
+                if (game.global.dificuldade == 'HARD' && game.global.score > game.global.max_scoreD){
                     game.global.max_scoreD = game.global.score;
                     this.maxScore.text = game.global.max_scoreD;
+                    game.global.new_record = 1;
                 }                
             }
         }
@@ -362,7 +371,7 @@ GameState.prototype.platformCollision = function (player, platform) {
             this.speedUp = this.game.add.sprite(0, 250, 'SpeedUp');
             game.time.events.add(150, function() {
                 game.add.tween(this.speedUp).to({y: 0}, 1500, Phaser.Easing.Linear.None, true);    
-                game.add.tween(this.speedUp).to({alpha: 0}, 1500, Phaser.Easing.Linear.None, true);
+                game.add.tween(this.speedUp).to({alpha: 0}, 1000, Phaser.Easing.Linear.None, true);
             }, this);     
 
         }
