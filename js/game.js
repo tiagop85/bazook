@@ -113,6 +113,22 @@ GameState.prototype.create = function () {
         'bgPlateia'
     );
         
+      
+    this.bg_pause = this.game.add.sprite(0,0, 'bgPauseSreen');
+    this.bg_pause.alpha = 0;
+    
+ 
+    this.topCirco = this.game.add.tileSprite(0, 
+        65,
+        //this.game.height - this.game.cache.getImage('bgTopCirco').height, 
+        this.game.width, 
+        this.game.cache.getImage('bgTopCirco').height, 
+        'bgTopCirco'
+    );
+
+    this.cabecalho = this.game.add.sprite(0,0, 'bgCabecalho');
+    this.cabecalho.scale.y = 0.8;
+    
     game.global.score = 0
       this.textScore = this.game.add.text(180, 10, game.global.score, {font: "bold 20px myfont", fill: "#fff", boundsAlignH: "center"});
     this.textScore.anchor.x = 0.5;    
@@ -131,23 +147,7 @@ GameState.prototype.create = function () {
 //            if (game.global.dificuldade == 'HARD' && game.global.score >= game.global.max_scoreD){
             this.maxScore.text = game.global.max_scoreD;
         }
-    }          
-    
-    
-    this.bg_pause = this.game.add.sprite(0,0, 'bgPauseSreen');
-    this.bg_pause.alpha = 0;
-    
- 
-    this.topCirco = this.game.add.tileSprite(0, 
-        65,
-        //this.game.height - this.game.cache.getImage('bgTopCirco').height, 
-        this.game.width, 
-        this.game.cache.getImage('bgTopCirco').height, 
-        'bgTopCirco'
-    );
-
-    this.cabecalho = this.game.add.sprite(0,0, 'bgCabecalho');
-    this.cabecalho.scale.y = 0.8;
+    }       
 
     this.menu = this.game.add.sprite(10, 10, 'menu')
 //    this.menu.scale.x = 1.1
