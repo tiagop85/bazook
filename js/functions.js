@@ -35,6 +35,7 @@ FunctionsGame.prototype.preload = function() {
     this.game.load.image('Medio'        , 'Assets/big_button_medium_on.png');
     this.game.load.image('Dificil'      , 'Assets/big_button_hard_on.png');
     this.game.load.image('SpeedUp'      , 'Assets/speed_up.png');
+    this.game.load.image('newRecord'    , 'Assets/new_high_score.png');
   
     this.game.load.script('gray'        , 'https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/Gray.js');    
     this.game.load.script('BlurX'       , 'https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/BlurX.js');

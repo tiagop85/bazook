@@ -15,14 +15,14 @@ MenuDificuldade.prototype.create = function() {
 //    this.play.events.onInputDown.add(gotoGame, this);
     
 //    this.credits = this.game.add.sprite(189, 240, 'Facil')
-    this.credits = this.game.add.sprite(347, 221, 'Facil')
+    this.credits = this.game.add.sprite(347, 191, 'Facil')
 //    this.credits.scale.x = 1.1
 //    this.credits.scale.y = 1.1
     this.credits.inputEnabled = true;
     this.credits.events.onInputDown.add(gotoDificuldadeFacil, this);    
     
 //    this.credits = this.game.add.sprite(339, 240, 'Medio')
-    this.credits = this.game.add.sprite(347, 268, 'Medio')
+    this.credits = this.game.add.sprite(347, 253, 'Medio')
 //    this.credits.scale.x = 1.1
 //    this.credits.scale.y = 1.1
     this.credits.inputEnabled = true;
