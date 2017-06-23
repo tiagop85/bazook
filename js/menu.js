@@ -15,11 +15,17 @@ MenuState.prototype.create = function() {
     
     this.game.add.sprite(0,0, 'bgMenu')
     
-    this.play = this.game.add.sprite(220, 400, 'start')
+    this.play = this.game.add.button(220, 400, 'start',gotoDificuldade, this);
+//    this.play = this.game.add.sprite(220, 400, 'start')
+//    button = game.add.button(game.world.centerX - 95, 400, 'button', actionOnClick, this, 2, 1, 0);
 //    this.play.scale.x = 1.1
 //    this.play.scale.y = 1.1
-    this.play.inputEnabled = true;
-    this.play.events.onInputDown.add(gotoDificuldade, this);
+//    this.play.inputEnabled = true;
+//    this.play.events.onInputDown.add(gotoDificuldade, this);
+    this.play.anchor.x = 0.5;
+    this.play.anchor.y = 0.5;    
+    this.play.onInputOver.add(over,{asd:this.play}, this);
+    this.play.onInputOut.add(out, {asd:this.play}, this);
     
     this.credits = this.game.add.sprite(450, 400, 'credits')
 //    this.credits.scale.x = 1.1
@@ -36,3 +42,4 @@ MenuState.prototype.create = function() {
 
 MenuState.prototype.update = function() {
 };
+

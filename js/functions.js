@@ -6,6 +6,7 @@ var FunctionsGame = function(game) {};
 FunctionsGame.prototype.preload = function() {
     this.game.load.image('bgMenu'       , 'Assets/initial_screen.png');
     this.game.load.image('start'        , 'Assets/big_button_play_on.png');
+    this.game.load.image('start_click'  , 'Assets/big_button_play_off.png');
     this.game.load.image('credits'      , 'Assets/big_button_credits_on.png');       
     this.game.load.image('sound_on'     , 'Assets/button_sound_on.png');
     this.game.load.image('sound_off'    , 'Assets/button_sound_off.png');    
@@ -74,6 +75,9 @@ FunctionsGame.prototype.update = function() {
 function gotoDificuldade(item) {
     this.button_click = this.game.add.music = this.add.audio('button_click');        
     this.button_click.play();
+    
+    this.play.loadTexture('start_click');
+    
     this.game.time.events.add(Phaser.Timer.SECOND * 0.2, startDificuldade, this);
 };
 
@@ -195,3 +199,25 @@ function startPause() {
     this.pause.loadTexture('play');
     game.paused = true;
 };
+
+function over(asd) {
+asd.loadTexture('start_click'); 
+//this.play.loadTexture('start_click'); 
+//    asd.anchor.x = 0.5;
+//    asd.anchor.y = 0.5;    
+//    asd.x = 220+asd.width/2;
+//    asd.y = 400+asd.height/2;
+    asd.scale.x = 1.2;
+    asd.scale.y = 1.2;
+}
+
+function out(asd) {
+asd.loadTexture('start'); 
+//this.loadTexture('start'); 
+//this.play.loadTexture('start'); 
+//    asd.x = 220+asd.width/2;
+//    asd.y = 400+asd.height/2;
+    asd.scale.x = 1;
+    asd.scale.y = 1;
+    
+}
