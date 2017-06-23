@@ -8,6 +8,7 @@ FunctionsGame.prototype.preload = function() {
     this.game.load.image('start'        , 'Assets/big_button_play_on.png');
     this.game.load.image('start_click'  , 'Assets/big_button_play_off.png');
     this.game.load.image('credits'      , 'Assets/big_button_credits_on.png');       
+    this.game.load.image('credits_click', 'Assets/big_button_credits_off.png');       
     this.game.load.image('sound_on'     , 'Assets/button_sound_on.png');
     this.game.load.image('sound_off'    , 'Assets/button_sound_off.png');    
     this.game.load.image('bgGameCirco'  , 'Assets/background_01.png');
@@ -33,9 +34,12 @@ FunctionsGame.prototype.preload = function() {
     this.game.load.image('bgPauseSreen' , 'Assets/pause_screen.png');
     
     this.game.load.image('GameMode'     , 'Assets/big_button_game_mode_on.png');
-    this.game.load.image('Facil'        , 'Assets/big_button_easy_on.png');
-    this.game.load.image('Medio'        , 'Assets/big_button_medium_on.png');
-    this.game.load.image('Dificil'      , 'Assets/big_button_hard_on.png');
+    this.game.load.image('facil'        , 'Assets/big_button_easy_on.png');
+    this.game.load.image('facil_click'  , 'Assets/big_button_easy_off.png');
+    this.game.load.image('medio'        , 'Assets/big_button_medium_on.png');
+    this.game.load.image('medio_click'  , 'Assets/big_button_medium_off.png');
+    this.game.load.image('dificil'      , 'Assets/big_button_hard_on.png');
+    this.game.load.image('dificil_click', 'Assets/big_button_hard_off.png');
     this.game.load.image('SpeedUp'      , 'Assets/speed_up.png');
     this.game.load.image('newRecord'    , 'Assets/new_high_score.png');
   
@@ -76,7 +80,11 @@ function gotoDificuldade(item) {
     this.button_click = this.game.add.music = this.add.audio('button_click');        
     this.button_click.play();
     
-    this.play.loadTexture('start_click');
+//    this.play.loadTexture('start');
+    
+//    botao.scale.x = 1;
+//    botao.scale.y = 1;
+
     
     this.game.time.events.add(Phaser.Timer.SECOND * 0.2, startDificuldade, this);
 };
@@ -200,24 +208,76 @@ function startPause() {
     game.paused = true;
 };
 
-function over(asd) {
-asd.loadTexture('start_click'); 
+function over_start(botao) {
+//    asseta = asseta.toString();
+//    console.debug("asset: " + asseta);
+botao.loadTexture('start_click'); 
 //this.play.loadTexture('start_click'); 
 //    asd.anchor.x = 0.5;
 //    asd.anchor.y = 0.5;    
 //    asd.x = 220+asd.width/2;
 //    asd.y = 400+asd.height/2;
-    asd.scale.x = 1.2;
-    asd.scale.y = 1.2;
+    botao.scale.x = 1.2;
+    botao.scale.y = 1.2;
 }
 
-function out(asd) {
-asd.loadTexture('start'); 
+function out_start(botao) {
+//    console.debug("asset: " + asseta);
+botao.loadTexture('start'); 
 //this.loadTexture('start'); 
 //this.play.loadTexture('start'); 
 //    asd.x = 220+asd.width/2;
 //    asd.y = 400+asd.height/2;
-    asd.scale.x = 1;
-    asd.scale.y = 1;
+    botao.scale.x = 1;
+    botao.scale.y = 1;
     
+}
+
+function over_credits(botao) {
+    botao.loadTexture('credits_click'); 
+    botao.scale.x = 1.2;
+    botao.scale.y = 1.2;
+}
+
+function out_credits(botao) {
+    botao.loadTexture('credits'); 
+    botao.scale.x = 1;
+    botao.scale.y = 1;    
+}
+
+
+function over_facil(botao) {
+    botao.loadTexture('facil_click'); 
+    botao.scale.x = 1.2;
+    botao.scale.y = 1.2;
+}
+
+function out_facil(botao) {
+    botao.loadTexture('facil'); 
+    botao.scale.x = 1;
+    botao.scale.y = 1;    
+}
+
+function over_medio(botao) {
+    botao.loadTexture('medio_click'); 
+    botao.scale.x = 1.2;
+    botao.scale.y = 1.2;
+}
+
+function out_medio(botao) {
+    botao.loadTexture('medio');
+    botao.scale.x = 1;
+    botao.scale.y = 1;    
+}
+
+function over_dificil(botao) {
+    botao.loadTexture('dificil_click'); 
+    botao.scale.x = 1.2;
+    botao.scale.y = 1.2;
+}
+
+function out_dificil(botao) {
+    botao.loadTexture('dificil');
+    botao.scale.x = 1;
+    botao.scale.y = 1;    
 }
