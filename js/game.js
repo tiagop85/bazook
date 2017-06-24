@@ -177,7 +177,7 @@ GameState.prototype.create = function () {
 
 //    console.debug("score: " + this.score);
     
-    this.cortina = this.game.add.sprite(0,100, 'bgCortina');
+    this.cortina = this.game.add.sprite(0,0, 'bgCortina');
     this.game.physics.enable(this.cortina);
     this.cortina.body.velocity.y = -650;
     
