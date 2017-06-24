@@ -177,7 +177,7 @@ GameState.prototype.create = function () {
 
 //    console.debug("score: " + this.score);
     
-    this.cortina = this.game.add.sprite(0,0, 'bgCortina');
+    this.cortina = this.game.add.sprite(0,-35, 'bgCortina');
     this.game.physics.enable(this.cortina);
     this.cortina.body.velocity.y = -650;
     
@@ -222,7 +222,7 @@ GameState.prototype.update = function () {
 //        game.world.filters = [gray];        
     }
     
-    if (this.GAME_STATUS == -1 && this.cortina.y >= 0){
+    if (this.GAME_STATUS == -1 && this.cortina.y >= -35){
         this.cortina.y = 0;
         this.cortina.body.velocity.y = 0;        
     }
@@ -299,7 +299,8 @@ GameState.prototype.update = function () {
                 this.platform.x += this.PLATFORM_SPEED/40;
             }
             else{
-                this.platform.x += 25;
+//                this.platform.x += 25;
+                this.platform.x += this.PLATFORM_SPEED/60;
             }
         }
         else{

@@ -1,0 +1,39 @@
+girafas: olhos mechendo, respiracao
+
+elefante subindo: ele ta feliz, capa espichada (ver Mario pulando com capa)
+elefante descendo: ele ta TENSO, capa caindo (ver Mario pulando com capa)
+elefante disparando o canhao: capa balançar, ele ta feliz
+elefante morto (olho fechado ou revirado, linga de fora)
+
+canhão: ao disparar, deve contrair e ir pra tras ao impulsionar
+
+plateia: animar asset: acenar, joinha, fazer polegar pra baixo, levantar mao, etc
+shadow na plateia para dar efeito de distância do palco
+
+rede das girafas: ao elefante quicar nela, deve afundar um pouco e voltar pra posição inicial e ir um pouco pra cima e voltar ao normal
+
+analisar game mode:
+http://a1.mzstatic.com/eu/r30/Purple71/v4/72/54/25/725425a9-e3ae-378b-eac0-a2470fc90b70/screen520x924.jpeg
+
+no game over: mostrar o nivel de dificuldade
+
+botoes 3d: https://www.todoespacoonline.com/w/2014/05/efeito-3d-em-botoes-com-css/ (observar o funcionamento do botao vermelho)
+
+todos os botoes: normal: em amarelo
+todos os botoes: ao passar o mouse em cima: em vermelho
+ao clicar (simples): pressionar o botao e voltar ao normal
+ao clicar (som/pause): pressionar o botao e so voltar ao normal qndo clicar outra vez 
+
+criar o background em 3d
+
+cortina: deixar 100px de folga pra cima
+
+ideia palco:
+https://s-media-cache-ak0.pinimg.com/736x/cf/f8/96/cff89676390020680358a637d86b2b9a--roosevelt-overalls.jpg
+
+
+Tiago
+> tentar ajeitar o asset do EASY, MEDIUM, HARD
+
+Perguntar tela de credito: logo da ludus? orientador?
+
