@@ -59,11 +59,12 @@ GameState.prototype.create = function () {
         this.game.cache.getImage('ground').height, 
         'ground'
     );   
-
+    
 //cenário
     this.cenarioItems = this.game.add.group();
     this.cenarioItems.enableBody = true;
-
+    this.cenarioItems.setAll("body.velocity.x",0); 
+    
 //canhão
     this.cannon = this.cenarioItems.create(85, 417-37, 'cannon');
     this.cannon.scale.x = 0.45;
@@ -75,8 +76,14 @@ GameState.prototype.create = function () {
     this.cannon_base.scale.x = 0.45;
     this.cannon_base.scale.y = 0.45;
     
-    this.cenarioItems.setAll("body.velocity.x",0); 
-        
+    this.topCirco = this.game.add.tileSprite(0, 
+        65,
+        //this.game.height - this.game.cache.getImage('bgTopCirco').height, 
+        this.game.width, 
+        this.game.cache.getImage('bgTopCirco').height, 
+        'bgTopCirco'
+    );
+    
 //player
     this.player = this.game.add.sprite(this.cannon.x, this.cannon.y, 'player');
     this.player.anchor.setTo(0.5, 0.5);
@@ -88,10 +95,9 @@ GameState.prototype.create = function () {
     
     //This makes the game world bounce-able
     this.player.body.collideWorldBounds = false;
-    this.player.body.bounce.set(1);
-        
-//plataforma
-    
+    this.player.body.bounce.set(1);    
+
+//plataforma    
     this.girafas = this.game.add.sprite(300, 380, 'girafas');
     this.girafas.animations.add('walk');
     this.girafas.animations.play('walk', 12, true);
@@ -105,27 +111,18 @@ GameState.prototype.create = function () {
     this.game.physics.enable(this.platform);
     this.platform.body.immovable = true;
     
-//plateia   
-    this.plateia = this.game.add.tileSprite(0, 
-        this.game.height - this.game.cache.getImage('bgPlateia').height, 
-        this.game.width, 
-        this.game.cache.getImage('bgPlateia').height, 
-        'bgPlateia'
-    );
+////plateia   
+//    this.plateia = this.game.add.tileSprite(0, 
+//        this.game.height - this.game.cache.getImage('bgPlateia').height, 
+//        this.game.width, 
+//        this.game.cache.getImage('bgPlateia').height, 
+//        'bgPlateia'
+//    );
         
       
     this.bg_pause = this.game.add.sprite(0,0, 'bgPauseSreen');
     this.bg_pause.alpha = 0;
     
- 
-    this.topCirco = this.game.add.tileSprite(0, 
-        65,
-        //this.game.height - this.game.cache.getImage('bgTopCirco').height, 
-        this.game.width, 
-        this.game.cache.getImage('bgTopCirco').height, 
-        'bgTopCirco'
-    );
-
     this.cabecalho = this.game.add.sprite(0,0, 'bgCabecalho');
     this.cabecalho.scale.y = 0.8;
     
@@ -180,9 +177,17 @@ GameState.prototype.create = function () {
 
 //    console.debug("score: " + this.score);
     
-    this.cortina = this.game.add.sprite(0,0, 'bgCortina');
+    this.cortina = this.game.add.sprite(0,100, 'bgCortina');
     this.game.physics.enable(this.cortina);
     this.cortina.body.velocity.y = -650;
+    
+//plateia   
+    this.plateia = this.game.add.tileSprite(0, 
+        this.game.height - this.game.cache.getImage('bgPlateia').height, 
+        this.game.width, 
+        this.game.cache.getImage('bgPlateia').height, 
+        'bgPlateia'
+    );    
 
     this.tambores.loopFull();   
     };
