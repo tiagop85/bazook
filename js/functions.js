@@ -10,7 +10,7 @@ FunctionsGame.prototype.preload = function() {
     this.game.load.image('credits'      , 'Assets/big_button_credits_on.png');       
     this.game.load.image('credits_click', 'Assets/big_button_credits_off.png');       
     this.game.load.image('sound_on'     , 'Assets/button_sound_on.png');
-    this.game.load.image('sound_off'    , 'Assets/button_sound_off.png');    
+    this.game.load.image('sound_off'    , 'Assets/button_mute_on.png');    
     this.game.load.image('bgGameCirco'  , 'Assets/background_01.png');
     this.game.load.image('bgTopCirco'   , 'Assets/topo_background.png');
     this.game.load.image('bgCabecalho'  , 'Assets/head_bazook.png');
@@ -24,8 +24,8 @@ FunctionsGame.prototype.preload = function() {
     this.game.load.image('cannon_base'  , 'Assets/cannon_basis.png');
        
     this.game.load.image('menu'         , 'Assets/button_home_on.png');
-    this.game.load.image('pause'        , 'Assets/button_pause.png');
-    this.game.load.image('play'         , 'Assets/button_play.png');
+    this.game.load.image('pause'        , 'Assets/button_pause_on.png');
+    this.game.load.image('play'         , 'Assets/button_play_on.png');
     this.game.load.image('bgGameOver'   , 'Assets/game_over_screen.png');
     this.game.load.image('restart'      , 'Assets/button_back_on.png');
     this.game.load.image('bgCredits'    , 'Assets/credits_screen.png');    
@@ -43,9 +43,9 @@ FunctionsGame.prototype.preload = function() {
     this.game.load.image('SpeedUp'      , 'Assets/speed_up.png');
     this.game.load.image('newRecord'    , 'Assets/new_high_score.png');
   
-    this.game.load.script('gray'        , 'https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/Gray.js');    
-    this.game.load.script('BlurX'       , 'https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/BlurX.js');
-    this.game.load.script('BlurY'       , 'https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/BlurY.js');    
+    this.game.load.script('gray'        , 'https://cdn.rawgit.com/photonstorm/phaser-ce/master/filters/Gray.js');
+    this.game.load.script('BlurX'       , 'https://cdn.rawgit.com/photonstorm/phaser-ce/master/filters/BlurX.js');
+    this.game.load.script('BlurY'       , 'https://cdn.rawgit.com/photonstorm/phaser-ce/master/filters/BlurY.js');    
     
     this.game.load.audio('music_menu'   , ['assets/audio/Super Circus_01.ogg']);
     this.game.load.audio('music_game'   , ['assets/audio/Circus Tent_01.ogg']);
