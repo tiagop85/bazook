@@ -47,20 +47,20 @@ FunctionsGame.prototype.preload = function() {
     this.game.load.script('BlurX'       , 'https://cdn.rawgit.com/photonstorm/phaser-ce/master/filters/BlurX.js');
     this.game.load.script('BlurY'       , 'https://cdn.rawgit.com/photonstorm/phaser-ce/master/filters/BlurY.js');    
     
-    this.game.load.audio('music_menu'   , ['assets/audio/Super Circus_01.ogg']);
-    this.game.load.audio('music_game'   , ['assets/audio/Circus Tent_01.ogg']);
+    this.game.load.audio('music_menu'   , ['Assets/audio/Super Circus_01.ogg']);
+    this.game.load.audio('music_game'   , ['Assets/audio/Circus Tent_01.ogg']);
     
-    this.game.load.audio('button_click' , ['assets/audio/Button-SoundBible.com-1420500901_01.ogg']);
-    this.game.load.audio('button_switch', ['assets/audio/Switch-SoundBible.com-350629905_01.ogg']);
-    this.game.load.audio('pulo_mola'    , ['assets/audio/zapsplat_caroon_plastic_twang_01.ogg']);    
-    this.game.load.audio('caiu_chao'    , ['assets/audio/PUNCH_01.ogg']);    
-//    this.game.load.audio('andando'    , ['assets/audio/268758__deleted-user-5093904__footsteps_01.ogg']);    
-    this.game.load.audio('tiro_canhao'  , ['assets/audio/370219__eflexthesounddesigner__cannon-shot-sci-fi-mixed_01.ogg']);    
-    this.game.load.audio('tambores'     , ['assets/audio/Drum Roll-SoundBible.com-1599301580_01.ogg']);    
-    this.game.load.audio('elefante'     , ['assets/audio/139052__jasher70__elephant-scream_01.ogg']);    
-    this.game.load.audio('aplausos'     , ['assets/audio/51743__erkanozan__applause_01.ogg']);    
+    this.game.load.audio('button_click' , ['Assets/audio/Button-SoundBible.com-1420500901_01.ogg']);
+    this.game.load.audio('button_switch', ['Assets/audio/Switch-SoundBible.com-350629905_01.ogg']);
+    this.game.load.audio('pulo_mola'    , ['Assets/audio/zapsplat_caroon_plastic_twang_01.ogg']);    
+    this.game.load.audio('caiu_chao'    , ['Assets/audio/PUNCH_01.ogg']);    
+//    this.game.load.audio('andando'    , ['Assets/audio/268758__deleted-user-5093904__footsteps_01.ogg']);    
+    this.game.load.audio('tiro_canhao'  , ['Assets/audio/370219__eflexthesounddesigner__cannon-shot-sci-fi-mixed_01.ogg']);    
+    this.game.load.audio('tambores'     , ['Assets/audio/Drum Roll-SoundBible.com-1599301580_01.ogg']);    
+    this.game.load.audio('elefante'     , ['Assets/audio/139052__jasher70__elephant-scream_01.ogg']);    
+    this.game.load.audio('aplausos'     , ['Assets/audio/51743__erkanozan__applause_01.ogg']);    
     
-    this.game.load.bitmapFont('myfont', 'assets/fonts/font.png', 'assets/fonts/font.fnt');        
+    this.game.load.bitmapFont('myfont', 'Assets/fonts/font.png', 'Assets/fonts/font.fnt');        
 /*
     this.aplausos = this.game.add.music = this.add.audio('aplausos');        
     this.aplausos.play();   
